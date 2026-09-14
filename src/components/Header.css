@@ -1,0 +1,128 @@
+.site-header {
+  background: var(--header-footer-bg);
+  border-bottom: 1px solid rgba(220, 180, 93, 0.3);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 82px;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.brand-link,
+.nav-link {
+  text-decoration: none;
+  color: var(--lightbeige);
+}
+
+.brand-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-family: var(--font-title);
+  white-space: nowrap;
+}
+
+.brand-title {
+  color: var(--lightbeige);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  color: var(--antiquegold);
+  font-family: var(--font-text);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--lightgolden);
+  border-bottom-color: var(--lightgolden);
+}
+
+.brand-link:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--lightgolden);
+  outline-offset: 4px;
+}
+
+.audio-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(220, 180, 93, 0.12);
+  border: 1px solid var(--antiquegold);
+  color: var(--lightbeige);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-family: var(--font-text);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.audio-toggle-btn:hover {
+  background: var(--antiquegold);
+  color: #1a0f0f;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 180, 93, 0.25);
+}
+
+.audio-toggle-btn.playing {
+  background: var(--lightgolden);
+  color: #160a0a;
+  border-color: var(--lightgolden);
+  box-shadow: 0 0 14px rgba(243, 229, 171, 0.4);
+  font-weight: 600;
+}
+
+.audio-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  .nav-links {
+    justify-content: center;
+  }
+
+  .brand-link {
+    align-items: center;
+  }
+}
