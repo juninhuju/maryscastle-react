@@ -1642,6 +1642,7 @@ button {
   .container-fluid {
     width: min(92%, 1200px);
     margin: 0 auto;
+  }
 
   h1 {
     padding: 1rem 0;
