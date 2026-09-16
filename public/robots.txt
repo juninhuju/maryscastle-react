@@ -1,5 +1,4 @@
 User-agent: *
-
 Allow: /
 
 Sitemap: https://livroocastelodasmarias.netlify.app/sitemap.xml
