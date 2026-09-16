@@ -154,7 +154,9 @@ button {
   border-radius: 10px;
   color: var(--lightbeige);
   text-decoration: none;
-  transition: transform 0.2s ease, border-color 0.2s ease,
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
     background-color 0.2s ease;
 }
 
@@ -515,7 +517,9 @@ button {
   background: rgba(58, 37, 39, 0.72);
   color: var(--lightgolden);
   font-size: 0.85rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .chapter-cover-link:hover .chapter-cover-caption {
@@ -998,7 +1002,9 @@ button {
   border-radius: 6px;
   color: var(--lightbeige);
   font-size: 0.8rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease,
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
     color 0.2s ease;
 }
 
@@ -1150,7 +1156,9 @@ button {
   color: var(--lightbeige);
   text-decoration: none;
   text-align: left;
-  transition: background-color 0.2s ease, border-color 0.2s ease,
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
     transform 0.2s ease;
 }
 
@@ -1626,6 +1634,20 @@ button {
 
   .kingdom-description p {
     text-align: left;
+  }
+
+  .kingdom-pager {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .kingdom-pager-link {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .kingdom-pager-index {
+    margin-bottom: 12px;
   }
 
   .carousel-stage {
