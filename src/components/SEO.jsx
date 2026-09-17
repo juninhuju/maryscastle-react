@@ -25,7 +25,7 @@ const routeMetadata = {
   },
   "/reinos": {
     title:
-      "Os Quatro Reinos de O Castelo das Marias | Planos Espirituais Paralelos",
+      "Os Quatro Reinos de O Castelo das Marias | Mundos Paralelos",
     description:
       "Conheça os reinos da Lira, Natural, Cemitério e Encruzilhada: mundos paralelos que refletem a jornada e os dilemas humanos em O Castelo das Marias.",
     image: "/lira.jpeg",
@@ -40,7 +40,7 @@ const routeMetadata = {
     title:
       "Junior Cristovam | Autor do Romance Sobrenatural O Castelo das Marias",
     description:
-      "Conheça Junior Cristovam, autor de 'O Castelo das Marias', obra que une drama psicológico, espiritualidade e mistério sobrenatural.",
+      "Conheça Junior Cristovam, autor de 'O Castelo das Marias', obra que une drama psicológico e mistério sobrenatural.",
     image: "/autor.jpeg",
   },
   "/downloads": {

@@ -13,7 +13,7 @@ function Sinopse() {
         onde o prazer é a moeda de troca e a sanidade, o preço.
       </p>
       <p>
-        Nesse cosmos dividido entre quatro reinos espirituais — o Natural, a
+        Nesse cosmos dividido entre quatro reinos — o Natural, a
         Lira, a Encruzilhada e o Cemitério —, Joaquim navega por um labirinto de
         salões luxuosos, ruas noturnas e túmulos esquecidos, confrontando
         guardiões e entidades que desafiam a lógica humana.

@@ -5,7 +5,7 @@ function AutorPage() {
       <p className="lead author-intro">
         Escritor brasileiro de fantasia e autor do romance{" "}
         <em>O Castelo das Marias</em>. Em sua obra de estreia, mistura fantasia,
-        espiritualidade, suspense e drama psicológico para criar um universo
+        sobrenatural, suspense e drama psicológico para criar um universo
         repleto de mistérios, escolhas e conflitos humanos.
       </p>
 

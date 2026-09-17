@@ -8,8 +8,7 @@ function ReinosPage() {
         Os Quatro Reinos | Um mundo Sobrenatural
       </h1>
       <p className="lead">
-        Conheça Lira, Natural, Cemitério e Encruzilhada: os quatro planos
-        espirituais que Joaquim atravessa em sua descida ao abismo, confrontando
+        Conheça Lira, Natural, Cemitério e Encruzilhada: os quatro reinos que Joaquim atravessa em sua descida ao abismo, confrontando
         o amor traído, o rancor e as leis implacáveis do universo criado por
         Junior Cristovam.
       </p>

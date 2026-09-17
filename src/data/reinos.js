@@ -72,7 +72,7 @@ export const reinos = [
     principios:
       "Livre-arbítrio, encruzilhada de escolhas e a inevitabilidade das consequências",
     introducao:
-      "Governado com astúcia pelo Guardião Sete, o Reino da Encruzilhada é o ponto de encontro de todos os destinos. Entre ruas ardentes e capas que cortam a noite, o livre-arbítrio é lei: você é livre para escolher, mas não para escapar das consequências.",
+      "Governado pelo Guardião Sete, o Reino da Encruzilhada é o ponto de encontro de todos os destinos. Entre ruas ardentes e capas que cortam a noite, você é livre para escolher, mas não para escapar das consequências.",
     paragrafos: [
       "O Reino da Encruzilhada é onde o mundo interrompe o movimento para refletir — mas nunca para ficar. É o ponto onde todos os caminhos se cruzam, onde o tempo hesita e a alma se escuta. Ali, a decisão é sagrada, e o livre-arbítrio é tratado como uma espada de dois gumes: pode abrir portas ou cortar pontes. Cada pedra da rua carrega histórias de quem passou, hesitou, escolheu — e pagou.",
       "Este reino pulsa com energia ígnea, ardente como a vontade de seguir em frente. É o fogo da ação, da coragem, da dúvida que queima e ilumina. A Encruzilhada não é um lugar de permanência, mas de passagem consciente. Seus habitantes são soldados do destino, estrategistas do espírito, conselheiros mascarados de alegria. Vestem ternos alinhados, cartolas elegantes e capas que dançam com o vento da noite. Carregam tridentes como símbolos de poder, e em batalha, empunham espadas e coletes de guerra reluzentes.",
