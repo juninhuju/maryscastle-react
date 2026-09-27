@@ -2,21 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- Home -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
     <image:image>
       <image:loc>https://livroocastelodasmarias.netlify.app/livro.webp</image:loc>
-      <image:title>Capa de O Castelo das Marias - Romance de Fantasia</image:title>
+      <image:title>Capa de O Castelo das Marias - Romance Sobrenatural</image:title>
       <image:caption>Capa oficial do livro O Castelo das Marias por Junior Cristovam</image:caption>
     </image:image>
   </url>
 
+  <!-- Primeiro Capítulo -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/livro</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -26,9 +28,10 @@
     </image:image>
   </url>
 
+  <!-- Quiz -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/quiz</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -37,16 +40,22 @@
     </image:image>
   </url>
 
+  <!-- Quatro Reinos - Visão Geral -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/reinos</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <image:image>
+      <image:loc>https://livroocastelodasmarias.netlify.app/livro.webp</image:loc>
+      <image:title>Os Quatro Reinos de O Castelo das Marias</image:title>
+    </image:image>
   </url>
 
+  <!-- Reinos Individuais -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/lira</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -57,7 +66,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/natural</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -68,7 +77,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/cemiterio</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -79,7 +88,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/encruzilhada</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -88,9 +97,10 @@
     </image:image>
   </url>
 
+  <!-- Autor -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/autor</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -99,18 +109,28 @@
     </image:image>
   </url>
 
+  <!-- Downloads -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/downloads</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+    <image:image>
+      <image:loc>https://livroocastelodasmarias.netlify.app/livro.webp</image:loc>
+      <image:title>Materiais para Download - O Castelo das Marias</image:title>
+    </image:image>
   </url>
 
+  <!-- Galeria -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/galeria</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-27</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+    <image:image>
+      <image:loc>https://livroocastelodasmarias.netlify.app/carrossel/1.webp</image:loc>
+      <image:title>Galeria de Imagens de O Castelo das Marias</image:title>
+    </image:image>
   </url>
 
 </urlset>

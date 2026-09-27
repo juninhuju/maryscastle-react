@@ -9,73 +9,72 @@ const routeMetadata = {
     title: "O Castelo das Marias | Romance Sobrenatural de Junior Cristovam",
     description:
       "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os quatro reinos do além.",
-    image: "/livro.jpeg",
+    image: "/livro.webp",
   },
   "/livro": {
-    title: "Primeiro Capítulo | O Castelo das Marias - Leia Online Grátis",
+    title:
+      "Primeiro Capítulo - Onde o Sangue Beija a Seda | O Castelo das Marias",
     description:
-      "Leia o primeiro capítulo de O Castelo das Marias. Acompanhe o choque da traição e a travessia de Joaquim por um universo paralelo.",
-    image: "/Adaga.jpeg",
+      "Leia online o primeiro capítulo de O Castelo das Marias. A dor da traição e a descida de Joaquim aos reinos sobrenaturais.",
+    image: "/Adaga.webp",
   },
   "/quiz": {
-    title: "Quiz dos Reinos | Descubra Sua Afinidade em O Castelo das Marias",
+    title: "Quiz dos Reinos | Descubra Sua Afinidade | O Castelo das Marias",
     description:
       "Faça o quiz e descubra com qual dos quatro reinos de O Castelo das Marias sua alma ressoa: Lira, Natural, Cemitério ou Encruzilhada.",
-    image: "/guardiao-sete.jpeg",
+    image: "/guardiao-sete.webp",
   },
   "/reinos": {
-    title:
-      "Os Quatro Reinos de O Castelo das Marias | Mundos Paralelos",
+    title: "Os Quatro Reinos | O Castelo das Marias",
     description:
-      "Conheça os reinos da Lira, Natural, Cemitério e Encruzilhada: mundos paralelos que refletem a jornada e os dilemas humanos em O Castelo das Marias.",
-    image: "/lira.jpeg",
+      "Conheça os reinos da Lira, Natural, Cemitério e Encruzilhada: mundos regidos por forças ancestrais no universo de O Castelo das Marias.",
+    image: "/lira.webp",
   },
   "/galeria": {
-    title: "Galeria de Imagens | O Castelo das Marias - Personagens e Cenários",
+    title: "Galeria de Imagens | Cenários e Personagens | O Castelo das Marias",
     description:
-      "Veja imagens exclusivas dos personagens, reinos e cenários do universo sombrio de O Castelo das Marias.",
-    image: "/carrossel/1.jpeg",
+      "Veja imagens exclusivas dos personagens, reinos e cenários conceituais de O Castelo das Marias.",
+    image: "/carrossel/1.webp",
   },
   "/autor": {
-    title:
-      "Junior Cristovam | Autor do Romance Sobrenatural O Castelo das Marias",
+    title: "Sobre o Autor: Junior Cristovam | O Castelo das Marias",
     description:
-      "Conheça Junior Cristovam, autor de 'O Castelo das Marias', obra que une drama psicológico e mistério sobrenatural.",
-    image: "/autor.jpeg",
+      "Conheça Junior Cristovam, autor de O Castelo das Marias, romance que une suspense, drama psicológico e fantasia sombria.",
+    image: "/autor.webp",
   },
   "/downloads": {
-    title:
-      "Materiais para Download | O Castelo das Marias - Capítulo e Músicas",
+    title: "Materiais para Download | Capítulo, Músicas e Artes",
     description:
-      "Baixe o primeiro capítulo de O Castelo das Marias, trilhas sonoras originais e artes exclusivas do livro.",
-    image: "/capa.jpeg",
+      "Baixe gratuitamente o primeiro capítulo em PDF, faixas da trilha sonora oficial em MP3 e ilustrações de O Castelo das Marias.",
+    image: "/livro.webp",
   },
 };
 
 const kingdomMetadata = {
   "/lira": {
-    title: "Reino da Lira | O Castelo das Marias - Maria Padilha",
+    title: "Reino da Lira | Guardiã Maria Padilha | O Castelo das Marias",
     description:
-      "Conheça o Reino da Lira, governado por Maria Padilha, um dos quatro reinos de O Castelo das Marias. Magia e mistério neste universo de fantasia.",
-    image: "/guardiao-padilha.jpeg",
+      "Governado por Maria Padilha, o Reino da Lira é a morada do desejo, da música e da soberania feminina no universo de O Castelo das Marias.",
+    image: "/guardiao-padilha.webp",
   },
   "/natural": {
-    title: "Reino Natural | O Castelo das Marias - Esdras, Natureza e Magia",
+    title: "Reino Natural | Guardião Esdras | O Castelo das Marias",
     description:
-      "Explore o Reino Natural, governado por Esdras, no universo de O Castelo das Marias. Descubra a conexão com a natureza e a magia ancestral.",
-    image: "/guardiao-esdras.jpeg",
+      "Sob o olhar de Esdras, o Reino Natural pulsa entre árvores milenares e forças elementais, regido pelo princípio sagrado da troca.",
+    image: "/guardiao-esdras.webp",
   },
   "/cemiterio": {
-    title: "Reino do Cemitério | O Castelo das Marias - Senhor Caveira",
+    title:
+      "Reino do Cemitério | Guardião Senhor Caveira | O Castelo das Marias",
     description:
-      "Desvende o Reino do Cemitério, governado pelo misterioso Senhor Caveira, em O Castelo das Marias. Um reino de segredos sombrios e poder.",
-    image: "/guardiao-caveira.jpeg",
+      "O domínio da justiça implacável e da lei do retorno sob o julgamento do Senhor Caveira em O Castelo das Marias.",
+    image: "/guardiao-caveira.webp",
   },
   "/encruzilhada": {
-    title: "Reino da Encruzilhada | O Castelo das Marias - Guardião Sete",
+    title: "Reino da Encruzilhada | Guardião Sete da Encruzilahada | O Castelo das Marias",
     description:
-      "Descubra o Reino da Encruzilhada, governado pelo Guardião Sete, um dos reinos mais enigmáticos de O Castelo das Marias. Fantasia e mistério aguardam.",
-    image: "/guardiao-sete.jpeg",
+      "O ponto de encontro de todos os caminhos e escolhas, regido pelo Guardião Sete da Encruzilahada em O Castelo das Marias.",
+    image: "/guardiao-sete.webp",
   },
 };
 
@@ -97,8 +96,9 @@ function SEO() {
       kingdomMetadata[pathname] || {
         title: `Página não encontrada | ${siteName}`,
         description: `A página que você procura não foi encontrada em ${siteName}.`,
-        image: "/livro.jpeg",
+        image: "/livro.webp",
       };
+
     const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
     const imageUrl = `${siteUrl}${metadata.image}`;
 
@@ -109,7 +109,7 @@ function SEO() {
     setMetaAttribute(
       "name",
       "robots",
-      pathname === "/404" ? "noindex" : "index, follow",
+      pathname === "/404" ? "noindex, nofollow" : "index, follow",
     );
     setMetaAttribute("property", "og:title", metadata.title);
     setMetaAttribute("property", "og:description", metadata.description);
@@ -130,22 +130,59 @@ function SEO() {
     }
     canonical.href = canonicalUrl;
 
-    const structuredData = {
+    // Gerar Schema estruturado dinâmico
+    let structuredData = {
       "@context": "https://schema.org",
-      "@type": pathname === "/" ? "Book" : "WebPage",
-      name: pathname === "/" ? siteName : metadata.title,
-      headline: metadata.title,
+      "@type": "WebPage",
+      name: metadata.title,
       description: metadata.description,
       url: canonicalUrl,
       image: imageUrl,
-      ...(pathname === "/" && {
+    };
+
+    if (pathname === "/") {
+      structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        name: "O Castelo das Marias",
+        headline: metadata.title,
+        description: metadata.description,
+        url: canonicalUrl,
+        image: imageUrl,
         author: {
           "@type": "Person",
           name: "Junior Cristovam",
         },
         inLanguage: "pt-BR",
-      }),
-    };
+      };
+    } else if (pathname === "/livro") {
+      structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Chapter",
+        name: "Capítulo 1 - Onde o Sangue Beija a Seda",
+        isPartOf: {
+          "@type": "Book",
+          name: "O Castelo das Marias",
+          author: {
+            "@type": "Person",
+            name: "Junior Cristovam",
+          },
+        },
+        position: 1,
+        url: canonicalUrl,
+        inLanguage: "pt-BR",
+      };
+    } else if (pathname === "/autor") {
+      structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Junior Cristovam",
+        jobTitle: "Escritor",
+        description: metadata.description,
+        url: canonicalUrl,
+        image: imageUrl,
+      };
+    }
 
     let structuredDataElement = document.head.querySelector(
       'script[data-seo="structured-data"]',

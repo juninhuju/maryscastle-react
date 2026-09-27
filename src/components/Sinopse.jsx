@@ -9,7 +9,7 @@ function Sinopse() {
         um homem que acreditava que a traição de sua amada esposa era o fim de
         sua jornada, mas descobre que ela foi apenas a chave para o abismo.
         Consumido pelo desejo furioso de vingança, ele cruza a fronteira da
-        razão e desperta em um bordel enigmático cravado em um plano paralelo,
+        razão e desperta em um bordel enigmático cravado em um mundo paralelo,
         onde o prazer é a moeda de troca e a sanidade, o preço.
       </p>
       <p>
