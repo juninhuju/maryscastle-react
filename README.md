@@ -18,6 +18,10 @@ npm run build
 npm run preview
 ```
 
+O build também pré-renderiza as páginas públicas em `dist/`, com HTML e
+metadados específicos por rota. O sitemap e o `robots.txt` são publicados na
+raiz junto com os arquivos do site.
+
 ## Integração de comentários
 
 Copie `.env.example` para `.env` e preencha as variáveis do Back4App:

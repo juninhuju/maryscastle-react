@@ -5,7 +5,7 @@
   <!-- Home -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
     <image:image>
@@ -18,7 +18,7 @@
   <!-- Primeiro Capítulo -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/livro</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -30,21 +30,21 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/livro/2</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/livro/3</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/livro/4</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -52,7 +52,7 @@
   <!-- Quiz -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/quiz</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -64,7 +64,7 @@
   <!-- Quatro Reinos - Visão Geral -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/reinos</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -76,7 +76,7 @@
   <!-- Reinos Individuais -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/lira</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -87,7 +87,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/natural</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -98,7 +98,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/cemiterio</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -109,7 +109,7 @@
 
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/encruzilhada</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -121,7 +121,7 @@
   <!-- Autor -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/autor</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <image:image>
@@ -133,7 +133,7 @@
   <!-- Galeria -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/galeria</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
     <image:image>

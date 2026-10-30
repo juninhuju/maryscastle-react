@@ -138,7 +138,7 @@ function Footer() {
         </div>
         <div className="footer-bottom">
           <p className="copyright">
-            © 2026 Castelo das Marias. Todos os direitos reservados.
+            © 2026 O Castelo das Marias. Todos os direitos reservados.
           </p>
           <span className="footer-credit">Por Junior Cristovam</span>
         </div>

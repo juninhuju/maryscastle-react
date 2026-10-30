@@ -26,31 +26,37 @@ function PageReset() {
   return null;
 }
 
+export function AppContent() {
+  return (
+    <div className="page-container">
+      <SEO />
+      <PageReset />
+      <a className="skip-link" href="#main-content">
+        Ir para o conteúdo principal
+      </a>
+      <Header />
+      <div id="main-content" className="content-wrap" tabIndex="-1">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/livro" element={<LivroPage />} />
+          <Route path="/livro/:chapter" element={<LivroPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/reinos" element={<ReinosPage />} />
+          <Route path="/galeria" element={<GaleriaPage />} />
+          <Route path="/autor" element={<AutorPage />} />
+          <Route path="/:slug" element={<KingdomPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <div className="page-container">
-        <SEO />
-        <PageReset />
-        <a className="skip-link" href="#main-content">
-          Ir para o conteúdo principal
-        </a>
-        <Header />
-        <div id="main-content" className="content-wrap" tabIndex="-1">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/livro" element={<LivroPage />} />
-            <Route path="/livro/:chapter" element={<LivroPage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/reinos" element={<ReinosPage />} />
-            <Route path="/galeria" element={<GaleriaPage />} />
-            <Route path="/autor" element={<AutorPage />} />
-            <Route path="/:slug" element={<KingdomPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
+      <AppContent />
     </BrowserRouter>
   );
 }
