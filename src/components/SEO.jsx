@@ -10,7 +10,7 @@ const routeMetadata = {
     title: "O Castelo das Marias | Romance Sobrenatural de Junior Cristovam",
     description:
       "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os mistérios dos quatro reinos.",
-    image: "/livro.webp",
+    image: "/Adaga.webp",
   },
   "/livro": {
     title:
@@ -23,7 +23,7 @@ const routeMetadata = {
     title: "Quiz dos Reinos | Descubra Sua Afinidade | O Castelo das Marias",
     description:
       "Faça o quiz e descubra com qual dos quatro reinos de O Castelo das Marias sua alma ressoa: Lira, Natural, Cemitério ou Encruzilhada.",
-    image: "/guardiao-sete.webp",
+    image: "/Adaga.webp",
   },
   "/reinos": {
     title: "Os Quatro Reinos | O Castelo das Marias",
