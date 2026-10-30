@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { reinoMap, reinos } from "../data/reinos";
+import NotFoundPage from "./NotFoundPage";
 
 const guardiaoImages = {
   lira: { jpeg: "/guardiao-padilha.jpeg", webp: "/guardiao-padilha.webp" },
@@ -17,14 +18,7 @@ function KingdomPage() {
   const reinoProximo = reinos[(reinoIndex + 1) % reinos.length];
 
   if (!reino) {
-    return (
-      <main className="container-fluid page-reino">
-        <h1>Reino não encontrado</h1>
-        <Link className="btn btn-primary" to="/reinos">
-          Voltar para os reinos
-        </Link>
-      </main>
-    );
+    return <NotFoundPage />;
   }
 
   return (
@@ -32,6 +26,7 @@ function KingdomPage() {
       <Link className="back-link" to="/reinos">
         Voltar para os reinos
       </Link>
+      <p className="section-kicker page-kicker">Explore este plano</p>
       <h1>{reino.titulo}</h1>
       <h2>
         {reino.tratamentoGuardiao}: {reino.guardiao}

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import capitulos from "../data/capitulos.json";
 
 const siteName = "O Castelo das Marias";
 const siteUrl = "https://livroocastelodasmarias.netlify.app";
@@ -8,7 +9,7 @@ const routeMetadata = {
   "/": {
     title: "O Castelo das Marias | Romance Sobrenatural de Junior Cristovam",
     description:
-      "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os quatro reinos do além.",
+      "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os mistérios dos quatro reinos.",
     image: "/livro.webp",
   },
   "/livro": {
@@ -42,12 +43,6 @@ const routeMetadata = {
       "Conheça Junior Cristovam, autor de O Castelo das Marias, romance que une suspense, drama psicológico e fantasia sombria.",
     image: "/autor.webp",
   },
-  "/downloads": {
-    title: "Materiais para Download | Capítulo, Músicas e Artes",
-    description:
-      "Baixe gratuitamente o primeiro capítulo em PDF, faixas da trilha sonora oficial em MP3 e ilustrações de O Castelo das Marias.",
-    image: "/livro.webp",
-  },
 };
 
 const kingdomMetadata = {
@@ -71,9 +66,9 @@ const kingdomMetadata = {
     image: "/guardiao-caveira.webp",
   },
   "/encruzilhada": {
-    title: "Reino da Encruzilhada | Guardião Sete da Encruzilahada | O Castelo das Marias",
+    title: "Reino da Encruzilhada | Guardião Sete da Encruzilhada | O Castelo das Marias",
     description:
-      "O ponto de encontro de todos os caminhos e escolhas, regido pelo Guardião Sete da Encruzilahada em O Castelo das Marias.",
+      "O ponto de encontro de todos os caminhos e escolhas, regido pelo Guardião Sete da Encruzilhada em O Castelo das Marias.",
     image: "/guardiao-sete.webp",
   },
 };
@@ -92,14 +87,33 @@ function SEO() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const metadata = routeMetadata[pathname] ||
+    const chapterMatch = pathname.match(/^\/livro(?:\/(\d+))?$/);
+    const chapterNumber = Number(chapterMatch?.[1] || 1);
+    const chapterTitle = capitulos.find(
+      (chapter) => chapter.number === chapterNumber,
+    )?.title;
+    const chapterMetadata =
+      chapterMatch && chapterTitle
+        ? {
+            title: `Capítulo ${chapterNumber} — ${chapterTitle} | ${siteName}`,
+            description: `Leia online o capítulo ${chapterNumber} de O Castelo das Marias, romance sobrenatural de Junior Cristovam.`,
+            image: "/Adaga.webp",
+          }
+        : null;
+    const metadata = chapterMetadata || routeMetadata[pathname] ||
       kingdomMetadata[pathname] || {
         title: `Página não encontrada | ${siteName}`,
         description: `A página que você procura não foi encontrada em ${siteName}.`,
         image: "/livro.webp",
       };
 
-    const canonicalUrl = `${siteUrl}${pathname === "/" ? "/" : pathname}`;
+    const isNotFound =
+      !chapterMetadata &&
+      !routeMetadata[pathname] &&
+      !kingdomMetadata[pathname];
+    const canonicalPath =
+      chapterMetadata && chapterNumber === 1 ? "/livro" : pathname;
+    const canonicalUrl = `${siteUrl}${canonicalPath}`;
     const imageUrl = `${siteUrl}${metadata.image}`;
 
     document.title = metadata.title;
@@ -109,7 +123,7 @@ function SEO() {
     setMetaAttribute(
       "name",
       "robots",
-      pathname === "/404" ? "noindex, nofollow" : "index, follow",
+      isNotFound ? "noindex, nofollow" : "index, follow",
     );
     setMetaAttribute("property", "og:title", metadata.title);
     setMetaAttribute("property", "og:description", metadata.description);
@@ -155,11 +169,11 @@ function SEO() {
         },
         inLanguage: "pt-BR",
       };
-    } else if (pathname === "/livro") {
+    } else if (chapterMatch && chapterTitle) {
       structuredData = {
         "@context": "https://schema.org",
         "@type": "Chapter",
-        name: "Capítulo 1 - Onde o Sangue Beija a Seda",
+        name: `Capítulo ${chapterNumber} — ${chapterTitle}`,
         isPartOf: {
           "@type": "Book",
           name: "O Castelo das Marias",
@@ -168,7 +182,7 @@ function SEO() {
             name: "Junior Cristovam",
           },
         },
-        position: 1,
+        position: chapterNumber,
         url: canonicalUrl,
         inLanguage: "pt-BR",
       };

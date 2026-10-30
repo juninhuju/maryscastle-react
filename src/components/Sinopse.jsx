@@ -1,7 +1,8 @@
 function Sinopse() {
   return (
-    <section className="sinopse-section">
-      <h2>Sinopse de O Castelo das Marias</h2>
+    <section className="sinopse-section" aria-labelledby="synopsis-title">
+      <p className="section-kicker">O universo da obra</p>
+      <h2 id="synopsis-title">Sinopse</h2>
       <p>
         <strong>O Castelo das Marias</strong> é um romance sobrenatural
         brasileiro criado por <em>Junior Cristovam</em> que mergulha nas
@@ -19,7 +20,7 @@ function Sinopse() {
         guardiões e entidades que desafiam a lógica humana.
       </p>
       <p>
-        Enquanto a realidade material se desfaz, ele é forçado a encarar o que
+        À medida que sua percepção do mundo se transforma, ele é forçado a encarar o que
         sempre tentou reprimir: o amor que ainda arde em cinzas, a ferida aberta
         da infidelidade e a vergonha de suas próprias fraquezas. Ali, os quatro
         reinos não são apenas cenários, mas o espelho implacável de sua

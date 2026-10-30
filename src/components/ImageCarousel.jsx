@@ -80,6 +80,17 @@ function ImageCarousel() {
         >
           &#8250;
         </button>
+        <a
+          className="carousel-download"
+          href={activeSlide.src}
+          download={`O-Castelo-das-Marias-imagem-${activeSlide.id}.jpeg`}
+          aria-label={`Baixar imagem ${activeSlide.id}`}
+          title="Baixar esta imagem"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3" />
+          </svg>
+        </a>
       </div>
 
       <button

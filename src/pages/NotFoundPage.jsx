@@ -9,9 +9,14 @@ function NotFoundPage() {
         Este caminho não leva a nenhum reino conhecido. Volte ao início e
         continue explorando o universo de O Castelo das Marias.
       </p>
-      <Link className="btn btn-primary" to="/">
-        Voltar ao início
-      </Link>
+      <div className="not-found-actions">
+        <Link className="btn btn-primary" to="/">
+          Voltar ao início
+        </Link>
+        <Link className="btn btn-secondary" to="/reinos">
+          Explorar os reinos
+        </Link>
+      </div>
     </main>
   );
 }

@@ -1,24 +1,7 @@
-import { useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 function Header() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
-
-  const toggleAudio = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => setIsPlaying(false));
-    }
-  };
-
   return (
     <header className="site-header">
       <div className="navbar container-fluid">
@@ -28,17 +11,23 @@ function Header() {
         </Link>
 
         <nav className="nav-links" aria-label="Navegação principal">
-          <NavLink to="/" className="nav-link">
-            Início
+          <NavLink
+            to="/"
+            end
+            className="nav-link home-nav-link"
+            aria-label="Página inicial"
+            title="Início"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" />
+            </svg>
+            <span className="sr-only">Início</span>
           </NavLink>
           <NavLink to="/livro" className="nav-link">
             Capítulo
           </NavLink>
           <NavLink to="/quiz" className="nav-link">
             Quiz
-          </NavLink>
-          <NavLink to="/downloads" className="nav-link">
-            Materiais
           </NavLink>
           <NavLink to="/galeria" className="nav-link">
             Imagens
@@ -50,35 +39,6 @@ function Header() {
             Reinos
           </NavLink>
         </nav>
-
-        <div className="audio-wrapper">
-          <audio
-            ref={audioRef}
-            src="/magoaremix.mp3"
-            preload="none"
-            onEnded={() => setIsPlaying(false)}
-          />
-          <button
-            type="button"
-            className={`audio-toggle-btn ${isPlaying ? "playing" : ""}`}
-            onClick={toggleAudio}
-            aria-label={
-              isPlaying
-                ? "Pausar trilha sonora oficial"
-                : "Tocar trilha sonora oficial"
-            }
-            title={
-              isPlaying ? "Pausar trilha sonora" : "Tocar trilha sonora oficial"
-            }
-          >
-            <span className="audio-icon" aria-hidden="true">
-              {isPlaying ? "⏸️" : "🎵"}
-            </span>
-            <span className="audio-status-text">
-              {isPlaying ? "Pausar Trilha" : "Trilha Sonora"}
-            </span>
-          </button>
-        </div>
       </div>
     </header>
   );

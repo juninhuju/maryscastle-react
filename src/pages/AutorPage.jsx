@@ -1,7 +1,8 @@
 function AutorPage() {
   return (
     <main className="container-fluid page-author">
-      <h1>Junior Cristovam — Autor de O Castelo das Marias</h1>
+      <p className="section-kicker page-kicker">Por trás do universo</p>
+      <h1>Junior Cristovam</h1>
       <p className="lead author-intro">
         Escritor brasileiro de fantasia e autor do romance{" "}
         <em>O Castelo das Marias</em>. Em sua obra de estreia, mistura fantasia,
