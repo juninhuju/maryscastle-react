@@ -134,7 +134,7 @@ function LivroPage() {
       <div className="chapter-download-row">
         <a
           className="chapter-download"
-          href="/Cap1a4"
+          href="/capitulos"
           download="O-Castelo-das-Marias-Capitulos-1-a-4.pdf"
         >
           <DownloadIcon />

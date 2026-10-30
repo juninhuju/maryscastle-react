@@ -3099,6 +3099,43 @@ button {
 }
 
 @media (max-width: 520px) {
+  .quiz-page {
+    padding-top: 1.5rem;
+  }
+
+  .quiz-page > .page-kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  .quiz-page > h1 {
+    padding: 0.35rem 0 0.8rem;
+  }
+
+  .quiz-instruction {
+    margin: 0 auto 1.5rem;
+    padding: 0 0.35rem;
+    line-height: 1.65;
+  }
+
+  .quiz-progress {
+    margin-bottom: 0.65rem;
+    line-height: 1.5;
+  }
+
+  .quiz-item {
+    margin-bottom: 0.25rem;
+    padding: 1.35rem 0 1.55rem;
+  }
+
+  .quiz-item legend {
+    padding-bottom: 1rem;
+    line-height: 1.55;
+  }
+
+  .quiz-options {
+    gap: 0.65rem;
+  }
+
   .chapter-navigation {
     flex-direction: column;
   }
