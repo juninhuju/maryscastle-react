@@ -17,6 +17,12 @@ const routeMetadata = {
       "Leia online o primeiro capítulo de O Castelo das Marias. A dor da traição e a descida de Joaquim aos reinos sobrenaturais.",
     image: "/Adaga.webp",
   },
+  "/comprar": {
+    title: "Aviso de lançamento | O Castelo das Marias",
+    description:
+      "Cadastre seu e-mail para receber um aviso quando O Castelo das Marias estiver disponível.",
+    image: "/Adaga.webp",
+  },
   "/quiz": {
     title: "Quiz dos Reinos | Descubra Sua Afinidade | O Castelo das Marias",
     description:

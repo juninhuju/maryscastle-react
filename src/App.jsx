@@ -13,6 +13,7 @@ import KingdomPage from "./pages/KingdomPage";
 import AdminPage from "./pages/AdminPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SEO from "./components/SEO";
+import ReleaseNotice from "./components/ReleaseNotice";
 
 function PageReset() {
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ function PageReset() {
 export function AppContent() {
   const { pathname } = useLocation();
   const isAdminPage = pathname === "/junioradm";
+  const isPurchasePage = pathname === "/comprar";
 
   return (
     <div className="page-container">
@@ -39,11 +41,12 @@ export function AppContent() {
       <a className="skip-link" href="#main-content">
         Ir para o conteúdo principal
       </a>
-      {!isAdminPage && <Header />}
+      {!isAdminPage && !isPurchasePage && <Header />}
       <div id="main-content" className="content-wrap" tabIndex="-1">
         <Routes>
           <Route path="/junioradm" element={<AdminPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/comprar" element={<ReleaseNotice standalone />} />
           <Route path="/livro" element={<LivroPage />} />
           <Route path="/livro/:chapter" element={<LivroPage />} />
           <Route path="/quiz" element={<QuizPage />} />
@@ -54,7 +57,7 @@ export function AppContent() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-      {!isAdminPage && (
+      {!isAdminPage && !isPurchasePage && (
         <>
           <SoundtrackSection />
           <Footer />
