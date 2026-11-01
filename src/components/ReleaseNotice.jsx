@@ -36,6 +36,9 @@ function ReleaseNotice({ children, className = "", standalone = false }) {
           origem: window.location.pathname,
         }),
       });
+      if (!response.headers.get("content-type")?.includes("application/json")) {
+        throw new Error("invalid-registration-response");
+      }
       const result = await response.json();
 
       if (!response.ok) {
