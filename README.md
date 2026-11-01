@@ -56,6 +56,18 @@ deram consentimento, revisar/remover comentários e atualizar/exportar as
 respostas do formulário de pré-venda conectado a uma planilha do Google Sheets.
 As respostas do formulário são lidas da planilha quando o administrador clica
 em **Atualizar respostas**; elas não são copiadas para o Back4App.
+Na seção de pré-venda, também é possível importar um CSV exportado do Google
+Forms com as colunas de carimbo de data/hora, nome, e-mail, telefone, cidade,
+endereço, quantidade e forma de pagamento. O arquivo é lido localmente no
+navegador e fica disponível apenas durante a sessão; não é enviado ou salvo.
+O importador aceita CSV separado por vírgula ou ponto e vírgula, confere o
+formato dos e-mails e limita as cidades a Birigui - SP e Araçatuba - SP.
+Importações e atualizações da planilha acrescentam apenas novos pedidos,
+identificados por carimbo de data/hora e e-mail (ou pelos dados do pedido
+quando não há carimbo). Registros repetidos são ignorados sem substituir os
+dados já exibidos, inclusive situação e data de pagamento. Se o CSV não tiver
+valor, o painel o calcula pelos pacotes de R$ 55,00 e mostra colunas de valor,
+status e data de pagamento.
 
 O painel usa Netlify Functions. Configure as variáveis abaixo em **Netlify >
 Site configuration > Environment variables** e faça um novo deploy:

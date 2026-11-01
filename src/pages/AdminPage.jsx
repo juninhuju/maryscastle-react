@@ -1,4 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  mergePreorderOrders,
+  parsePreorderCsv,
+} from "../utils/preorderCsv";
 
 const AUTH_ENDPOINT = "/api/admin-auth";
 const DATA_ENDPOINT = "/api/admin-data";
@@ -120,6 +124,10 @@ function AdminPage() {
   const [ordersLoading, setOrdersLoading] = useState(false);
   const [ordersError, setOrdersError] = useState("");
   const [ordersStatus, setOrdersStatus] = useState("");
+  const [ordersSource, setOrdersSource] = useState("");
+  const ordersFileInput = useRef(null);
+  const ordersRef = useRef(null);
+  const [activeSection, setActiveSection] = useState("emails");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
@@ -271,9 +279,12 @@ function AdminPage() {
         method: "POST",
         body: JSON.stringify({ action: "refresh-orders" }),
       });
-      setOrders(data);
+      const mergedOrders = mergePreorderOrders(ordersRef.current, data);
+      ordersRef.current = mergedOrders;
+      setOrders(mergedOrders);
+      setOrdersSource("Google Sheets");
       setOrdersStatus(
-        `Atualizado em ${formatDate(data.updatedAt)} · ${data.rows.length} respostas`,
+        `Atualizado em ${formatDate(data.updatedAt)} · ${mergedOrders.rows.length} respostas`,
       );
     } catch (requestError) {
       if (requestError.status === 401) {
@@ -282,6 +293,30 @@ function AdminPage() {
       setOrdersError(requestError.message);
     } finally {
       setOrdersLoading(false);
+    }
+  };
+
+  const handleImportOrdersCsv = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    setOrdersError("");
+    setOrdersStatus("");
+    try {
+      const importedOrders = parsePreorderCsv(await file.text());
+      const mergedOrders = mergePreorderOrders(
+        ordersRef.current,
+        importedOrders,
+      );
+      ordersRef.current = mergedOrders;
+      setOrders(mergedOrders);
+      setOrdersSource("CSV local");
+      setOrdersStatus(
+        `${mergedOrders.addedCount} novas respostas adicionadas; ${mergedOrders.skippedCount} repetidas ignoradas. Arquivo: ${file.name}. Disponíveis somente nesta sessão.`,
+      );
+    } catch (importError) {
+      setOrdersError(importError.message);
     }
   };
 
@@ -431,7 +466,30 @@ function AdminPage() {
         </p>
       )}
 
-      <section className="admin-panel" aria-labelledby="admin-emails-title">
+      <nav className="admin-section-nav" aria-label="Seções administrativas">
+        {[
+          ["emails", "E-mails cadastrados"],
+          ["send-email", "Enviar e-mail"],
+          ["comments", "Comentários"],
+          ["orders", "Pré-venda"],
+        ].map(([section, label]) => (
+          <button
+            key={section}
+            className="admin-button"
+            type="button"
+            aria-pressed={activeSection === section}
+            onClick={() => setActiveSection(section)}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      <section
+        className="admin-panel"
+        aria-labelledby="admin-emails-title"
+        hidden={activeSection !== "emails"}
+      >
         <div className="admin-section-heading">
           <div>
             <p className="section-kicker">Aviso de lançamento</p>
@@ -508,7 +566,11 @@ function AdminPage() {
         </div>
       </section>
 
-      <section className="admin-panel" aria-labelledby="admin-email-compose-title">
+      <section
+        className="admin-panel"
+        aria-labelledby="admin-email-compose-title"
+        hidden={activeSection !== "send-email"}
+      >
         <div className="admin-section-heading">
           <div>
             <p className="section-kicker">Comunicação com leitores</p>
@@ -626,7 +688,11 @@ function AdminPage() {
         )}
       </section>
 
-      <section className="admin-panel" aria-labelledby="admin-comments-title">
+      <section
+        className="admin-panel"
+        aria-labelledby="admin-comments-title"
+        hidden={activeSection !== "comments"}
+      >
         <div className="admin-section-heading">
           <div>
             <p className="section-kicker">Vozes dos leitores</p>
@@ -683,24 +749,45 @@ function AdminPage() {
         </div>
       </section>
 
-      <section className="admin-panel" aria-labelledby="admin-orders-title">
+      <section
+        className="admin-panel"
+        aria-labelledby="admin-orders-title"
+        hidden={activeSection !== "orders"}
+      >
         <div className="admin-section-heading">
           <div>
             <p className="section-kicker">Google Forms</p>
             <h2 id="admin-orders-title">Pedidos de pré-venda</h2>
           </div>
-          <button
-            className="admin-button admin-button-primary"
-            type="button"
-            onClick={handleRefreshOrders}
-            disabled={ordersLoading}
-          >
-            {ordersLoading ? "Atualizando..." : "Atualizar respostas"}
-          </button>
+          <div className="admin-order-actions">
+            <button
+              className="admin-button"
+              type="button"
+              onClick={() => ordersFileInput.current?.click()}
+            >
+              Importar CSV
+            </button>
+            <input
+              ref={ordersFileInput}
+              className="admin-file-input"
+              type="file"
+              accept=".csv,text/csv"
+              aria-label="Selecionar arquivo CSV de pré-venda"
+              onChange={handleImportOrdersCsv}
+            />
+            <button
+              className="admin-button admin-button-primary"
+              type="button"
+              onClick={handleRefreshOrders}
+              disabled={ordersLoading}
+            >
+              {ordersLoading ? "Atualizando..." : "Atualizar respostas"}
+            </button>
+          </div>
         </div>
         <p className="admin-section-description">
-          As respostas são lidas da planilha vinculada ao formulário e não são
-          copiadas para o Back4App.
+          Consulte a planilha conectada ou importe um CSV. Arquivos CSV são
+          processados somente nesta sessão e não são enviados nem salvos.
         </p>
         {ordersStatus && (
           <p className="admin-notice" role="status">
@@ -721,7 +808,10 @@ function AdminPage() {
         {orders && (
           <>
             <div className="admin-tools">
-              <span>{orders.rows.length} respostas carregadas</span>
+              <span>
+                {orders.rows.length} respostas carregadas
+                {ordersSource && ` · ${ordersSource}`}
+              </span>
               <button
                 className="admin-button"
                 type="button"
