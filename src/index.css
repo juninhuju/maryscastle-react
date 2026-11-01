@@ -3103,11 +3103,20 @@ button {
 }
 
 .release-notice-submit {
-  justify-self: center;
-  min-height: 2.7rem;
+  justify-self: stretch;
+  min-height: 2.5rem;
   margin-top: 0.25rem;
-  padding: 0.65rem 1rem;
-  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  background: var(--warmbrown);
+  transition: background-color 0.2s ease;
+}
+
+.release-notice-submit:hover,
+.release-notice-submit:focus-visible {
+  background: color-mix(in srgb, var(--warmbrown) 78%, var(--lightgolden));
+  box-shadow: none;
+  transform: none;
 }
 
 .release-notice-submit:disabled {
