@@ -79,10 +79,6 @@ function ReleaseNotice({ children, className = "", standalone = false }) {
       <Heading id={standalone ? "purchase-page-title" : "release-notice-title"}>
         Receba o aviso de lançamento
       </Heading>
-      <p className="release-notice-description">
-        O livro ainda não está à venda. Deixe seu e-mail para saber quando
-        estiver disponível.
-      </p>
       <form className="release-notice-form" onSubmit={handleSubmit}>
         <label htmlFor={standalone ? "purchase-email" : "release-notice-email"}>
           Seu e-mail

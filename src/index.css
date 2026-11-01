@@ -3208,11 +3208,6 @@ button {
   padding: clamp(1.5rem, 6vw, 3rem);
 }
 
-.release-notice-description {
-  max-width: 30rem;
-  margin: 0.5rem auto;
-}
-
 @media (max-width: 520px) {
   .quiz-page {
     padding-top: 1.5rem;
