@@ -75,7 +75,7 @@ function applyMetadata(html, metadata) {
     [
       "name",
       "robots",
-      metadata.isNotFound ? "noindex, nofollow" : "index, follow",
+      metadata.noIndex ? "noindex, nofollow" : "index, follow",
     ],
     ["property", "og:title", metadata.title],
     ["property", "og:description", metadata.description],

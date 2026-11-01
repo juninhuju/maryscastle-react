@@ -11,11 +11,7 @@ function Comentario() {
   const [mostrarTodos, setMostrarTodos] = useState(false);
   const [novoComentario, setNovoComentario] = useState({ nome: "", texto: "" });
   const [enviando, setEnviando] = useState(false);
-  const [erro, setErro] = useState(
-    apiConfigured
-      ? ""
-      : "Os comentários estarão disponíveis quando a API for configurada.",
-  );
+  const [erro, setErro] = useState("");
 
   const carregarComentarios = async () => {
     if (!apiConfigured) {
@@ -47,6 +43,10 @@ function Comentario() {
   const comentariosVisiveis = mostrarTodos
     ? comentarios
     : comentarios.slice(0, 6);
+
+  if (!apiConfigured) {
+    return null;
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();

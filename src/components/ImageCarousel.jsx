@@ -1,9 +1,39 @@
 import { useEffect, useState } from "react";
 
+const descricoesSlides = [
+  "Joaquim atravessa uma rua antiga coberta pela névoa.",
+  "Moradores e viajantes se reúnem diante de um castelo iluminado.",
+  "Um homem de capa vermelha caminha sob a lua em uma rua deserta.",
+  "Uma figura vestida de vermelho segura um tridente em uma rua iluminada.",
+  "Um ancião compartilha a leitura com uma criança em um campo ensolarado.",
+  "Um casal se aproxima em uma sala iluminada por velas.",
+  "Um homem segura um tridente enquanto figuras o observam à luz de velas.",
+  "Um viajante encara um portal mágico no meio de uma floresta.",
+  "Figuras encapuzadas formam uma procissão em um salão antigo.",
+  "Uma mulher vestida de vermelho posa diante da lua com um tridente.",
+  "Um homem imponente conversa com mulheres em uma sala de tons púrpura.",
+  "Uma figura encapuzada contempla um cemitério sob a lua vermelha.",
+  "Três figuras encapuzadas vigiam um caminho diante de um cemitério.",
+  "Um casal troca olhares em uma igreja iluminada pelo sol.",
+  "Uma viajante de capa roxa segue por um campo em direção a um castelo.",
+  "Figuras de caveira se reúnem diante de um mausoléu.",
+  "Uma carruagem cruza uma rua antiga ao entardecer.",
+  "Um viajante encapuzado caminha entre árvores sob a lua.",
+  "Um homem participa de um ritual diante de uma árvore marcada por símbolos.",
+  "Um homem de capa vermelha percorre uma rua iluminada à noite.",
+  "Um grupo de viajantes e guerreiros se reúne diante de um castelo.",
+  "Uma figura observa um exército em uma paisagem sob a lua vermelha.",
+  "Um guardião de verde recebe visitantes em uma floresta.",
+  "Um casal encapuzado permanece junto em uma floresta à luz de velas.",
+  "Um homem corre por uma rua cercado por figuras sombrias.",
+];
+
 const slides = Array.from({ length: 25 }, (_, index) => ({
   id: index + 1,
   src: `/carrossel/${index + 1}.jpeg`,
-  alt: `Imagem do carrossel ${index + 1} de O Castelo das Marias`,
+  description:
+    descricoesSlides[index] ||
+    `Arte conceitual de fantasia sobrenatural do universo de O Castelo das Marias, cena ${index + 1}.`,
 }));
 
 function ImageCarousel() {
@@ -55,11 +85,16 @@ function ImageCarousel() {
     >
       <div className="carousel-stage">
         <div className="carousel-live" aria-live="polite" aria-atomic="true">
-          <img
-            src={activeSlide.src}
-            alt={activeSlide.alt}
-            className="carousel-image"
-          />
+          <figure className="carousel-figure">
+            <img
+              src={activeSlide.src}
+              alt={activeSlide.description}
+              className="carousel-image"
+            />
+            <figcaption className="carousel-caption" aria-hidden="true">
+              {activeSlide.description}
+            </figcaption>
+          </figure>
           <span className="sr-only">
             Imagem {activeIndex + 1} de {slides.length}
           </span>

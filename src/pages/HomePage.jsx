@@ -22,7 +22,7 @@ function HomePage() {
 
           <div className="home-quick-actions" aria-label="Comece por aqui">
             <Link to="/livro" className="quick-action quick-action-primary">
-              <span className="quick-action-kicker">Entre para a história</span>
+              <span className="quick-action-kicker">Leitura gratuita</span>
               <strong>Ler os quatro primeiros capítulos</strong>
               <span>Conheça o início da jornada de Joaquim</span>
             </Link>

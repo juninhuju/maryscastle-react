@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { reinos as dadosReinos } from "../data/reinos";
 
 const perguntas = [
   {
@@ -274,13 +276,23 @@ const perguntas = [
 const reinos = ["Cemitério", "Natural", "Encruzilhada", "Lira"];
 
 const resultadoDescricao = {
-  Lira: "Suas escolhas priorizam autonomia, desejo e dignidade. Você não confunde paz com submissão e tende a proteger o direito de cada pessoa escolher por si. Sua força está em não se apagar para ser aceito; seu desafio é sustentar essa liberdade sem ignorar os efeitos das próprias escolhas.",
+  Lira: "Você tende a priorizar autonomia, desejo e dignidade. Sua força está em não se apagar para ser aceito; seu ponto de atenção é considerar como suas escolhas também afetam quem está ao redor.",
   Encruzilhada:
-    "Suas escolhas priorizam autonomia de decisão e leitura das consequências. Diante de uma rota imposta, você procura alternativas e prefere assumir o risco de escolher a obedecer por medo. Sua força está em encontrar passagem; seu desafio é não adiar decisões esperando uma saída perfeita.",
+    "Você tende a procurar alternativas e assumir a responsabilidade de escolher o próprio caminho. Sua força está em encontrar passagem; seu ponto de atenção é não adiar decisões à espera de uma saída perfeita.",
   Natural:
-    "Suas escolhas priorizam equilíbrio, reciprocidade e transformação. Você considera quem será afetado, o que precisa ser reparado e qual preço uma mudança cobra. Sua força está em reconhecer interdependências; seu desafio é não assumir sozinho a responsabilidade de reequilibrar tudo.",
+    "Você tende a ponderar equilíbrio, reciprocidade e o preço de cada transformação. Sua força está em perceber como as escolhas se conectam; seu ponto de atenção é não assumir sozinho a responsabilidade de reequilibrar tudo.",
   Cemitério:
-    "Suas escolhas priorizam responsabilidade e consequência. Para você, reconhecer o dano e responder por ele é parte da justiça; perdão sem prestação de contas não resolve a ruptura. Sua força está em não encobrir o que aconteceu; seu desafio é não deixar que a cobrança se torne punição sem fim.",
+    "Você tende a exigir responsabilidade e não ignorar o dano causado. Sua força está em encarar as consequências; seu ponto de atenção é não deixar que a busca por justiça se transforme em punição sem fim.",
+};
+
+const comparacaoParticipantes = {
+  Lira: "Na Lira, Maria Padilha e as Marias defendem o desejo e o consentimento como lei. A afinidade entre vocês está em afirmar a própria vontade sem abrir mão do respeito.",
+  Encruzilhada:
+    "Sete orienta, provoca e abre caminhos, mas deixa a decisão nas mãos de quem os percorre. O Povo da Rua conhece o preço de cada rota — uma afinidade com sua disposição para escolher e seguir adiante.",
+  Natural:
+    "Esdras ensina pela escuta, enquanto magos e feiticeiros conhecem a lei da troca. No Reino Natural, mudar exige compreender o que se transforma junto — perspectiva que combina com a sua.",
+  Cemitério:
+    "O Senhor Caveira e as Caveiras fazem cumprir as leis do reino: ali, nenhuma escolha desaparece sem deixar vestígios. Você compartilha com seus habitantes a convicção de que a verdade precisa ser encarada.",
 };
 
 const principiosReinos = {
@@ -302,49 +314,41 @@ const imagensReinos = {
 
 function QuizPage() {
   const [respostas, setRespostas] = useState({});
+  const [questaoAtual, setQuestaoAtual] = useState(0);
   const [resultado, setResultado] = useState(null);
   const [desempate, setDesempate] = useState(null);
   const [escolhaDesempate, setEscolhaDesempate] = useState("");
-  const [faltantes, setFaltantes] = useState([]);
-  const [avisoId, setAvisoId] = useState(0);
-  const respondidas = Object.keys(respostas).length;
+  const [shareStatus, setShareStatus] = useState("");
+  const [instagramHelpOpen, setInstagramHelpOpen] = useState(false);
+  const questionLegendRef = useRef(null);
+  const isInitialQuestion = useRef(true);
 
   useEffect(() => {
-    if (!avisoId) {
-      return undefined;
-    }
-
-    const timeoutId = window.setTimeout(() => setAvisoId(0), 3000);
-    return () => window.clearTimeout(timeoutId);
-  }, [avisoId]);
-
-  const handleChange = (index, valor) => {
-    setRespostas((prev) => ({ ...prev, [index]: valor }));
-    setFaltantes((prev) => prev.filter((item) => item !== index));
-  };
-
-  const calcularResultado = (event) => {
-    event.preventDefault();
-    const faltando = perguntas
-      .map((_, index) => index)
-      .filter((index) => respostas[index] === undefined);
-    if (faltando.length) {
-      setFaltantes(faltando);
-      setAvisoId((prev) => prev + 1);
-      requestAnimationFrame(() => {
-        const primeiraFaltante = document.querySelector(".quiz-item.missing");
-        primeiraFaltante?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-        primeiraFaltante
-          ?.querySelector('input[type="radio"]')
-          ?.focus({ preventScroll: true });
-      });
+    if (isInitialQuestion.current) {
+      isInitialQuestion.current = false;
       return;
     }
+
+    questionLegendRef.current?.focus();
+  }, [questaoAtual]);
+
+  const reinoResultado = dadosReinos.find(
+    (reino) => reino.titulo === resultado?.reino,
+  );
+  const handleChange = (index, valor) => {
+    const novasRespostas = { ...respostas, [index]: valor };
+    setRespostas(novasRespostas);
+
+    if (index < perguntas.length - 1) {
+      setQuestaoAtual(index + 1);
+    } else {
+      calcularResultado(novasRespostas);
+    }
+  };
+
+  const calcularResultado = (respostasQuiz = respostas) => {
     const pontuacoes = Object.fromEntries(reinos.map((reino) => [reino, 0]));
-    Object.entries(respostas).forEach(([index, opcao]) => {
+    Object.entries(respostasQuiz).forEach(([index, opcao]) => {
       const pergunta = perguntas[index];
       pontuacoes[pergunta.opcoes[opcao].reino] += pergunta.peso || 1;
     });
@@ -364,22 +368,7 @@ function QuizPage() {
   };
 
   const concluirResultado = (reino, pontuacoes) => {
-    const evidencias = Object.entries(respostas)
-      .map(([index, opcao]) => {
-        const pergunta = perguntas[index];
-        const resposta = pergunta.opcoes[opcao];
-        return {
-          pergunta: pergunta.pergunta,
-          texto: resposta.texto,
-          peso: pergunta.peso || 1,
-          reino: resposta.reino,
-        };
-      })
-      .filter((resposta) => resposta.reino === reino)
-      .sort((a, b) => b.peso - a.peso)
-      .slice(0, 3);
-
-    setResultado({ reino, pontuacoes, evidencias });
+    setResultado({ reino, pontuacoes });
     setDesempate(null);
     setEscolhaDesempate("");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -392,8 +381,7 @@ function QuizPage() {
 
   const reiniciar = () => {
     setRespostas({});
-    setFaltantes([]);
-    setAvisoId(0);
+    setQuestaoAtual(0);
     setResultado(null);
     setDesempate(null);
     setEscolhaDesempate("");
@@ -410,11 +398,13 @@ function QuizPage() {
       "Meu resultado é o Reino Natural — equilíbrio, reciprocidade e reparação orientam minhas escolhas. Descubra qual plano de O Castelo das Marias chama por você:",
   };
 
-  const getUrlQuiz = () => {
-    return window.location.hostname === "localhost" ||
+  const getUrlResultado = () => {
+    const baseUrl =
+      window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1"
-      ? "https://livroocastelodasmarias.netlify.app/quiz"
-      : `${window.location.origin}/quiz`;
+        ? "https://livroocastelodasmarias.netlify.app"
+        : window.location.origin;
+    return `${baseUrl}${reinoResultado.rota}`;
   };
 
   const textoResultado = () => {
@@ -423,23 +413,23 @@ function QuizPage() {
 
   const compartilhar = (rede) => {
     const mensagem = textoResultado();
-    const urlQuiz = getUrlQuiz();
+    const urlResultado = getUrlResultado();
     const mensagemEncoded = encodeURIComponent(mensagem);
-    const urlQuizEncoded = encodeURIComponent(urlQuiz);
+    const urlResultadoEncoded = encodeURIComponent(urlResultado);
     const urls = {
-      twitter: `https://twitter.com/intent/tweet?text=${mensagemEncoded}&url=${urlQuizEncoded}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${urlQuizEncoded}`,
-      whatsapp: `https://api.whatsapp.com/send?text=${mensagemEncoded}%20${urlQuizEncoded}`,
+      twitter: `https://twitter.com/intent/tweet?text=${mensagemEncoded}&url=${urlResultadoEncoded}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${urlResultadoEncoded}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${mensagemEncoded}%20${urlResultadoEncoded}`,
     };
 
     window.open(urls[rede], "_blank", "width=600,height=400");
   };
 
   const copiarResultado = async () => {
-    const texto = `${textoResultado()} ${getUrlQuiz()}`;
+    const texto = `${textoResultado()} ${getUrlResultado()}`;
     try {
       await navigator.clipboard.writeText(texto);
-      window.alert("Resultado copiado com sucesso!");
+      setShareStatus("Resultado copiado.");
     } catch {
       const textArea = document.createElement("textarea");
       textArea.value = texto;
@@ -449,9 +439,9 @@ function QuizPage() {
       textArea.select();
       const copiado = document.execCommand("copy");
       document.body.removeChild(textArea);
-      window.alert(
+      setShareStatus(
         copiado
-          ? "Resultado copiado com sucesso!"
+          ? "Resultado copiado."
           : "Não foi possível copiar o resultado automaticamente.",
       );
     }
@@ -461,10 +451,6 @@ function QuizPage() {
     <main className="container-fluid quiz-page">
       <p className="section-kicker page-kicker">Uma escolha revela caminhos</p>
       <h1>Descubra seu Reino</h1>
-      <p className="quiz-instruction">
-        O resultado considera os princípios que suas escolhas colocam em
-        primeiro lugar.
-      </p>
 
       {resultado ? (
         <section className="quiz-result-card">
@@ -473,19 +459,21 @@ function QuizPage() {
             src={imagensReinos[resultado.reino]}
             alt={`Guardião do Reino ${resultado.reino}`}
           />
-          <p className="quiz-result-description">
-            {resultadoDescricao[resultado.reino]}
-          </p>
-          <div className="quiz-result-evidence">
-            <h3>Respostas que sustentam este resultado</h3>
-            <ul>
-              {resultado.evidencias.map((evidencia) => (
-                <li key={evidencia.pergunta}>
-                  <strong>{evidencia.pergunta}</strong>
-                  <p>{evidencia.texto}</p>
-                </li>
-              ))}
-            </ul>
+          <section className="quiz-result-comparison">
+            <h3>Sua personalidade e os habitantes deste reino</h3>
+            <p className="quiz-result-description">
+              {resultadoDescricao[resultado.reino]}
+            </p>
+            <p>{comparacaoParticipantes[resultado.reino]}</p>
+          </section>
+          <div className="quiz-book-invitation">
+            <p>
+              {reinoResultado.introducao} Para conhecer essa jornada de perto,
+              comece pelos capítulos gratuitos.
+            </p>
+            <Link to="/livro" className="quiz-book-link">
+              Ler os quatro primeiros capítulos <span aria-hidden="true">→</span>
+            </Link>
           </div>
           <div className="quiz-share">
             <h3>Compartilhe seu Reino!</h3>
@@ -494,31 +482,105 @@ function QuizPage() {
                 type="button"
                 className="quiz-share-copy"
                 onClick={copiarResultado}
+                aria-label="Copiar resultado"
+                title="Copiar resultado"
               >
-                Copiar resultado
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="8" y="8" width="12" height="13" rx="2" />
+                  <path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2" />
+                </svg>
               </button>
               <button
                 type="button"
                 className="quiz-share-twitter"
                 onClick={() => compartilhar("twitter")}
+                aria-label="Compartilhar no X"
+                title="Compartilhar no X"
               >
-                Twitter/X
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z" />
+                </svg>
               </button>
               <button
                 type="button"
                 className="quiz-share-facebook"
                 onClick={() => compartilhar("facebook")}
+                aria-label="Compartilhar no Facebook"
+                title="Compartilhar no Facebook"
               >
-                Facebook
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.5 1.6-1.5h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.2H7.3v3.2h2.8V22h3.4Z" />
+                </svg>
               </button>
               <button
                 type="button"
                 className="quiz-share-whatsapp"
                 onClick={() => compartilhar("whatsapp")}
+                aria-label="Compartilhar no WhatsApp"
+                title="Compartilhar no WhatsApp"
               >
-                WhatsApp
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.5 11.8a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.3-4.9a8.4 8.4 0 1 1 16.2-3.8Z" />
+                  <path d="M8.2 7.9c.2-.5.4-.5.7-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4 0 .5l-.5.7c-.2.2-.2.4 0 .6.4.7 1 1.3 1.7 1.7.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.3.1.4.3.4.5 0 .8-.4 1.5-1 1.8-.6.3-1.4.5-2.9-.1-1.4-.6-2.5-1.5-3.5-2.7-.9-1.1-1.5-2.4-1.5-3.4 0-.5.2-.9.4-1.2Z" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="quiz-share-instagram"
+                onClick={() => setInstagramHelpOpen((isOpen) => !isOpen)}
+                aria-label="Como compartilhar no Instagram"
+                aria-expanded={instagramHelpOpen}
+                aria-controls="instagram-share-help"
+                title="Como compartilhar no Instagram"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle className="quiz-share-icon-dot" cx="18" cy="6" r="1" />
+                </svg>
               </button>
             </div>
+            {instagramHelpOpen && (
+              <div
+                className="quiz-instagram-help"
+                id="instagram-share-help"
+                aria-label="Instruções para compartilhar no Instagram"
+              >
+                <p>
+                  X, Facebook e WhatsApp abrem o compartilhamento diretamente.
+                  No Instagram, a publicação é manual:
+                </p>
+                <ol>
+                  <li>Copie o texto do seu resultado.</li>
+                  <li>
+                    Abra o Instagram, crie uma publicação ou story e cole o
+                    texto. Se quiser, adicione a imagem do guardião.
+                  </li>
+                </ol>
+                <div className="quiz-instagram-help-actions">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={copiarResultado}
+                  >
+                    Copiar texto e link
+                  </button>
+                  <a
+                    className="btn btn-secondary"
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Abrir Instagram
+                  </a>
+                </div>
+              </div>
+            )}
+            {shareStatus && (
+              <p className="quiz-share-status" role="status">
+                {shareStatus}
+              </p>
+            )}
           </div>
           <button
             type="button"
@@ -561,59 +623,76 @@ function QuizPage() {
           </form>
         </section>
       ) : (
-        <form className="quiz-form" onSubmit={calcularResultado}>
+        <form
+          className="quiz-form"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div
             className="quiz-progress"
-            aria-label={`Progresso: ${respondidas} de ${perguntas.length} perguntas respondidas`}
-            aria-live="polite"
+            role="progressbar"
+            aria-label="Progresso do quiz"
+            aria-valuemin={1}
+            aria-valuemax={perguntas.length}
+            aria-valuenow={questaoAtual + 1}
+            aria-valuetext={`${questaoAtual + 1} de ${perguntas.length}`}
           >
-            {respondidas} de {perguntas.length} perguntas respondidas
+            <div className="quiz-progress-heading">
+              <span>
+                {questaoAtual + 1} de {perguntas.length}
+              </span>
+            </div>
+            <span className="quiz-progress-track" aria-hidden="true">
+              <span
+                className="quiz-progress-fill"
+                style={{
+                  width: `${((questaoAtual + 1) / perguntas.length) * 100}%`,
+                }}
+              />
+            </span>
           </div>
-          {faltantes.length > 0 && avisoId > 0 && (
-            <p className="quiz-error" role="alert">
-              Responda às questões destacadas antes de enviar.
-            </p>
-          )}
-          {perguntas.map(({ pergunta, opcoes }, index) => (
-            <fieldset
-              key={pergunta}
-              aria-describedby={`pergunta-${index}-desc`}
-              className={
-                faltantes.includes(index) ? "quiz-item missing" : "quiz-item"
-              }
+          <fieldset
+            key={questaoAtual}
+            className="quiz-item"
+            aria-describedby={`pergunta-${questaoAtual}-desc`}
+          >
+            <legend
+              id={`pergunta-${questaoAtual}-desc`}
+              ref={questionLegendRef}
+              tabIndex="-1"
             >
-              <legend id={`pergunta-${index}-desc`}>
-                <span className="quiz-question-number">
-                  Questão {index + 1}:
-                </span>{" "}
-                {pergunta}
-              </legend>
-              <div
-                className="quiz-options"
-                role="radiogroup"
-                aria-label={`Opções para a questão ${index + 1}`}
-              >
-                {opcoes.map(({ texto }, optionIndex) => (
-                  <label key={texto} className="quiz-option">
-                    <input
-                      type="radio"
-                      name={`pergunta-${index}`}
-                      value={optionIndex}
-                      aria-label={`${String.fromCharCode(65 + optionIndex)}: ${texto}`}
-                      checked={respostas[index] === optionIndex}
-                      onChange={() => handleChange(index, optionIndex)}
-                    />
-                    <span>
-                      {String.fromCharCode(65 + optionIndex)}. {texto}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-          ))}
-          <button type="submit" className="btn btn-primary quiz-submit">
-            Enviar respostas
-          </button>
+              {perguntas[questaoAtual].pergunta}
+            </legend>
+            <div
+              className="quiz-options"
+              role="radiogroup"
+              aria-label={`Opções para a questão ${questaoAtual + 1}`}
+            >
+              {perguntas[questaoAtual].opcoes.map(({ texto }, optionIndex) => (
+                <label key={texto} className="quiz-option">
+                  <input
+                    type="radio"
+                    name={`pergunta-${questaoAtual}`}
+                    value={optionIndex}
+                    required
+                    aria-label={texto}
+                    checked={respostas[questaoAtual] === optionIndex}
+                    onChange={() => handleChange(questaoAtual, optionIndex)}
+                  />
+                  <span>{texto}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div className="quiz-navigation">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => setQuestaoAtual((current) => current - 1)}
+              disabled={questaoAtual === 0}
+            >
+              Voltar
+            </button>
+          </div>
         </form>
       )}
     </main>

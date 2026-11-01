@@ -21,7 +21,7 @@ function SEO() {
       description,
       imageUrl,
       canonicalUrl,
-      isNotFound,
+      noIndex,
       structuredData,
     } = getSeoMetadata(pathname);
 
@@ -32,7 +32,7 @@ function SEO() {
     setMetaAttribute(
       "name",
       "robots",
-      isNotFound ? "noindex, nofollow" : "index, follow",
+      noIndex ? "noindex, nofollow" : "index, follow",
     );
     setMetaAttribute("property", "og:title", title);
     setMetaAttribute("property", "og:description", description);

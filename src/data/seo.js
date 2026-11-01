@@ -48,27 +48,27 @@ const kingdomMetadata = {
     title: "Reino da Lira | Guardiã Maria Padilha | O Castelo das Marias",
     description:
       "Governado por Maria Padilha, o Reino da Lira é a morada do desejo, da música e da soberania feminina no universo de O Castelo das Marias.",
-    image: "/guardiao-padilha.webp",
+    image: "/guardiao-padilha.jpeg",
   },
   "/natural": {
     title: "Reino Natural | Guardião Esdras | O Castelo das Marias",
     description:
       "Sob o olhar de Esdras, o Reino Natural pulsa entre árvores milenares e forças elementais, regido pelo princípio sagrado da troca.",
-    image: "/guardiao-esdras.webp",
+    image: "/guardiao-esdras.jpeg",
   },
   "/cemiterio": {
     title:
       "Reino do Cemitério | Guardião Senhor Caveira | O Castelo das Marias",
     description:
       "O domínio da justiça implacável e da lei do retorno sob o julgamento do Senhor Caveira em O Castelo das Marias.",
-    image: "/guardiao-caveira.webp",
+    image: "/guardiao-caveira.jpeg",
   },
   "/encruzilhada": {
     title:
       "Reino da Encruzilhada | Guardião Sete da Encruzilhada | O Castelo das Marias",
     description:
       "O ponto de encontro de todos os caminhos e escolhas, regido pelo Guardião Sete da Encruzilhada em O Castelo das Marias.",
-    image: "/guardiao-sete.webp",
+    image: "/guardiao-sete.jpeg",
   },
 };
 
@@ -86,6 +86,7 @@ export const prerenderPaths = [
 export function getSeoMetadata(pathname) {
   const normalizedPath =
     pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+  const isAdminRoute = normalizedPath === "/junioradm";
   const chapterMatch = normalizedPath.match(/^\/livro(?:\/(\d+))?$/);
   const chapterNumber = Number(chapterMatch?.[1] || 1);
   const chapterTitle = capitulos.find(
@@ -99,12 +100,18 @@ export function getSeoMetadata(pathname) {
           image: "/Adaga.webp",
         }
       : null;
-  const metadata = chapterMetadata || routeMetadata[normalizedPath] ||
-    kingdomMetadata[normalizedPath] || {
+  const metadata = isAdminRoute
+    ? {
+        title: `Administração | ${siteName}`,
+        description: "Área administrativa restrita.",
+        image: "/livro.webp",
+      }
+    : chapterMetadata || routeMetadata[normalizedPath] ||
+      kingdomMetadata[normalizedPath] || {
       title: `Página não encontrada | ${siteName}`,
       description: `A página que você procura não foi encontrada em ${siteName}.`,
       image: "/livro.webp",
-    };
+      };
 
   const isNotFound =
     !chapterMetadata &&
@@ -173,6 +180,7 @@ export function getSeoMetadata(pathname) {
     canonicalUrl,
     imageUrl,
     isNotFound,
+    noIndex: isNotFound || isAdminRoute,
     structuredData,
   };
 }

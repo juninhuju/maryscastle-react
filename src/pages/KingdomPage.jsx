@@ -76,6 +76,18 @@ function KingdomPage() {
         ))}
       </article>
 
+      <section className="kingdom-reading-cta">
+        <p className="section-kicker">Entre na história</p>
+        <h2>Descubra como os reinos transformam a jornada de Joaquim</h2>
+        <p>
+          Os quatro primeiros capítulos estão disponíveis gratuitamente para
+          leitura online.
+        </p>
+        <Link to="/livro" className="btn btn-primary">
+          Começar a ler grátis <span aria-hidden="true">→</span>
+        </Link>
+      </section>
+
       <nav className="kingdom-navigation" aria-label="Navegação entre reinos">
         <div className="kingdom-pager">
           <Link className="kingdom-pager-link" to={reinoAnterior.rota}>
