@@ -120,7 +120,7 @@ function ReleaseNotice({ children, className = "", standalone = false }) {
             ? "Enviando..."
             : status?.type === "success"
               ? "Cadastro confirmado"
-              : "Quero ser avisado"}
+              : "Enviar"}
         </button>
         {status && (
           <div
