@@ -91,9 +91,6 @@ function ImageCarousel() {
               alt={activeSlide.description}
               className="carousel-image"
             />
-            <figcaption className="carousel-caption" aria-hidden="true">
-              {activeSlide.description}
-            </figcaption>
           </figure>
           <span className="sr-only">
             Imagem {activeIndex + 1} de {slides.length}

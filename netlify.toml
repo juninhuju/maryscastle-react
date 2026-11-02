@@ -6,16 +6,6 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/old-path"
-  to = "/new-path"
-  status = 301
-
 [[headers]]
   for = "/*"
   [headers.values]

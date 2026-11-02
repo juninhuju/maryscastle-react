@@ -5,7 +5,7 @@ const siteUrl = "https://livroocastelodasmarias.netlify.app";
 
 const routeMetadata = {
   "/": {
-    title: "O Castelo das Marias | Romance Sobrenatural de Junior Cristovam",
+    title: "O Castelo das Marias | Romance de Junior Cristovam",
     description:
       "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os mistérios dos quatro reinos.",
     image: "/Adaga.webp",
@@ -24,21 +24,21 @@ const routeMetadata = {
     image: "/Adaga.webp",
   },
   "/quiz": {
-    title: "Quiz dos Reinos | Descubra Sua Afinidade | O Castelo das Marias",
+    title: "Quiz dos Reinos: descubra sua afinidade | Castelo das Marias",
     description:
       "Faça o quiz e descubra com qual dos quatro reinos de O Castelo das Marias sua alma ressoa: Lira, Natural, Cemitério ou Encruzilhada.",
     image: "/Adaga.webp",
   },
   "/reinos": {
-    title: "Os Quatro Reinos | O Castelo das Marias",
+    title: "Os Quatro Reinos de O Castelo das Marias",
     description:
       "Conheça os reinos da Lira, Natural, Cemitério e Encruzilhada: mundos regidos por forças ancestrais no universo de O Castelo das Marias.",
     image: "/lira.webp",
   },
   "/galeria": {
-    title: "Galeria de Imagens | Cenários e Personagens | O Castelo das Marias",
+    title: "Galeria de Imagens | O Castelo das Marias",
     description:
-      "Veja imagens exclusivas dos personagens, reinos e cenários conceituais de O Castelo das Marias.",
+      "Explore a galeria de O Castelo das Marias: imagens dos personagens, dos quatro reinos e de cenários que compõem o universo visual do romance.",
     image: "/carrossel/1.webp",
   },
   "/autor": {
@@ -64,16 +64,16 @@ const kingdomMetadata = {
   },
   "/cemiterio": {
     title:
-      "Reino do Cemitério | Guardião Senhor Caveira | O Castelo das Marias",
+      "Reino do Cemitério | Senhor Caveira | Castelo das Marias",
     description:
-      "O domínio da justiça implacável e da lei do retorno sob o julgamento do Senhor Caveira em O Castelo das Marias.",
+      "Conheça o Reino do Cemitério em O Castelo das Marias: um domínio de névoa, justiça e consequências, sob o julgamento do Senhor Caveira.",
     image: "/guardiao-caveira.jpeg",
   },
   "/encruzilhada": {
     title:
-      "Reino da Encruzilhada | Guardião Sete da Encruzilhada | O Castelo das Marias",
+      "Reino da Encruzilhada | Guardião Sete | Castelo das Marias",
     description:
-      "O ponto de encontro de todos os caminhos e escolhas, regido pelo Guardião Sete da Encruzilhada em O Castelo das Marias.",
+      "Conheça o Reino da Encruzilhada de O Castelo das Marias, onde caminhos e escolhas se cruzam sob a guarda do Sete da Encruzilhada.",
     image: "/guardiao-sete.jpeg",
   },
 };
@@ -93,16 +93,19 @@ export function getSeoMetadata(pathname) {
   const normalizedPath =
     pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
   const isAdminRoute = normalizedPath === "/junioradm";
+  const isCampaignRoute = normalizedPath === "/comprar";
   const chapterMatch = normalizedPath.match(/^\/livro(?:\/(\d+))?$/);
   const chapterNumber = Number(chapterMatch?.[1] || 1);
   const chapterTitle = capitulos.find(
     (chapter) => chapter.number === chapterNumber,
   )?.title;
+  const chapterSiteName =
+    chapterNumber === 1 ? "Castelo das Marias" : siteName;
   const chapterMetadata =
     chapterMatch && chapterTitle
       ? {
-          title: `Capítulo ${chapterNumber} — ${chapterTitle} | ${siteName}`,
-          description: `Leia online o capítulo ${chapterNumber} de O Castelo das Marias, romance sobrenatural de Junior Cristovam.`,
+          title: `Capítulo ${chapterNumber} — ${chapterTitle} | ${chapterSiteName}`,
+          description: `Leia o capítulo ${chapterNumber}, “${chapterTitle}”, de O Castelo das Marias. Acompanhe Joaquim neste romance sobrenatural de Junior Cristovam.`,
           image: "/Adaga.webp",
         }
       : null;
@@ -124,7 +127,11 @@ export function getSeoMetadata(pathname) {
     !routeMetadata[normalizedPath] &&
     !kingdomMetadata[normalizedPath];
   const canonicalPath =
-    chapterMetadata && chapterNumber === 1 ? "/livro" : normalizedPath;
+    chapterMetadata && chapterNumber === 1
+      ? "/livro/"
+      : normalizedPath === "/"
+        ? "/"
+        : `${normalizedPath}/`;
   const canonicalUrl = `${siteUrl}${canonicalPath}`;
   const imageUrl = `${siteUrl}${metadata.image}`;
 
@@ -186,7 +193,7 @@ export function getSeoMetadata(pathname) {
     canonicalUrl,
     imageUrl,
     isNotFound,
-    noIndex: isNotFound || isAdminRoute,
+    noIndex: isNotFound || isAdminRoute || isCampaignRoute,
     structuredData,
   };
 }
