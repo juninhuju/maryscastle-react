@@ -24,14 +24,12 @@ raiz junto com os arquivos do site.
 
 ## Integração com Back4App
 
-Copie `.env.example` para `.env` e preencha as variáveis do Back4App:
-
-```bash
-VITE_PARSE_APP_ID=
-VITE_PARSE_JS_KEY=
-```
-
-O arquivo `.env` não deve ser versionado.
+Os comentários usam a função Netlify `/api/comments` para ler e publicar
+comentários com as credenciais de servidor do Back4App. Configure
+`PARSE_APP_ID` e `PARSE_MASTER_KEY` nas variáveis de ambiente do Netlify; não
+exponha essas credenciais no navegador. Para desenvolvimento local, copie
+`.env.example` para `.env` e preencha as variáveis. O arquivo `.env` não deve
+ser versionado.
 
 ### Cadastro para comprar o livro
 
@@ -132,6 +130,7 @@ mais registros, exporte a lista completa diretamente na fonte de dados.
 - `src/components`: blocos reutilizáveis de interface.
 - `src/data`: dados compartilhados dos reinos.
 - `src/api`: cliente Axios do Back4App.
-- `netlify/functions`: endpoints seguros do painel administrativo.
+- `netlify/functions`: endpoints de comentários, cadastro e painel
+  administrativo.
 - `public`: imagens, áudio, PDF e demais assets públicos.
 # maryscastle-react

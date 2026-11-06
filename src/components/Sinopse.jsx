@@ -4,37 +4,37 @@ function Sinopse() {
       <p className="section-kicker">O universo da obra</p>
       <h2 id="synopsis-title">Sinopse</h2>
       <p>
-        <strong>O Castelo das Marias</strong> é um romance sobrenatural
-        brasileiro criado por <em>Junior Cristovam</em> que mergulha nas
-        fraturas mais profundas da paixão, da dor e do ódio. Acompanha Joaquim,
-        um homem que acreditava que a traição de sua amada esposa era o fim de
-        sua jornada, mas descobre que ela foi apenas a chave para o abismo.
-        Consumido pelo desejo furioso de vingança, ele cruza a fronteira da
-        razão e desperta em um bordel enigmático cravado em um mundo paralelo,
-        onde o prazer é a moeda de troca e a sanidade, o preço.
+        <strong>O Castelo das Marias</strong>
       </p>
       <p>
-        Nesse cosmos dividido entre quatro reinos — o Natural, a
-        Lira, a Encruzilhada e o Cemitério —, Joaquim navega por um labirinto de
-        salões luxuosos, ruas noturnas e túmulos esquecidos, confrontando
-        guardiões e entidades que desafiam a lógica humana.
+        Joaquim nunca imaginou que a traição o levaria tão longe.
       </p>
       <p>
-        À medida que sua percepção do mundo se transforma, ele é forçado a encarar o que
-        sempre tentou reprimir: o amor que ainda arde em cinzas, a ferida aberta
-        da infidelidade e a vergonha de suas próprias fraquezas. Ali, os quatro
-        reinos não são apenas cenários, mas o espelho implacável de sua
-        decadência interior.
+        Movido pelo desejo de vingança contra a esposa infiel, o homem
+        conservador cruza os limites da razão e adentra o Castelo das Marias —
+        um bordel enigmático em um mundo paralelo, onde o prazer é apenas o
+        início de uma jornada sombria.
       </p>
       <p>
-        Neste romance onde o erotismo sutil e o horror sobrenatural colidem, o
-        místico revela o drama humano em sua essência mais crua. Joaquim
-        descobrirá que o verdadeiro terror não habita na escuridão dos reinos,
-        mas no ódio e no rancor que o devoram por dentro.
+        Nesse universo dividido entre quatro reinos — o Natural, a Lira, a
+        Encruzilhada e o Cemitério —, criaturas sobrenaturais e feiticeiras
+        sedutoras habitam cenários que vão de salões luxuosos a túmulos
+        esquecidos.
       </p>
       <p>
-        Até onde você iria para punir quem amou e o feriu, se a vingança
-        custasse a sua própria alma?
+        À medida que se afasta da realidade, Joaquim é confrontado por seus
+        desejos mais reprimidos e segredos vergonhosos. As mulheres que o
+        cercam podem ser sua perdição — ou o espelho de tudo o que ele tentou
+        negar.
+      </p>
+      <p>
+        Neste romance sensual e aterrorizante, o fantástico se entrelaça ao
+        drama humano, revelando que o verdadeiro horror não está nas criaturas
+        do além, mas na luta contra aquilo que arde dentro de nós.
+      </p>
+      <p>
+        No fim, resta a pergunta: o que é mais perigoso — o mundo oculto que o
+        seduz ou os abismos que ele carrega dentro de si?
       </p>
     </section>
   );

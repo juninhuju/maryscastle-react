@@ -54,6 +54,39 @@ function HomePage() {
 
       <Sinopse />
 
+      <section
+        className="editorial-presentation"
+        aria-labelledby="editorial-title"
+      >
+        <h2 id="editorial-title">Apresentação editorial</h2>
+        <blockquote>
+          <p>
+            Há histórias que nos convidam a atravessar uma porta.{" "}
+            <em>O Castelo das Marias</em> exige mais: que observemos o que
+            carregamos ao passar por ela. Joaquim chega a esse universo movido
+            pela dor e pelo desejo de vingança, mas encontra forças que não
+            cabem nas certezas com que interpretava a própria vida.
+          </p>
+          <p>
+            Junior Cristovam constrói uma fantasia de reinos, rituais e
+            presenças inquietantes sem perder de vista o conflito humano que
+            sustenta a jornada. O fantástico amplia cada escolha do
+            protagonista; o horror também nasce do orgulho, dos impulsos e das
+            verdades que ele resiste a reconhecer.
+          </p>
+          <p>
+            É um romance de atmosfera intensa, em que sedução e ameaça dividem
+            o mesmo espaço. Convido você a entrar no <em>Castelo</em> com
+            atenção aos seus mistérios e, sobretudo, às perguntas que eles
+            deixam do lado de fora.
+          </p>
+        </blockquote>
+        <p className="editorial-attribution">
+          <strong>Saymon César</strong>
+          <span>Editor-chefe da Editora Fantásticos</span>
+        </p>
+      </section>
+
       <section className="cards-section" aria-labelledby="kingdoms-title">
         <p className="section-kicker">Quatro reinos. Um destino incerto.</p>
         <h2 id="kingdoms-title">Os reinos</h2>

@@ -42,11 +42,6 @@ function AutorPage() {
           combustível de sua imaginação, alimentando histórias que buscam o que
           há de oculto sob a superfície da normalidade.
         </p>
-        <p>
-          <em>O Castelo das Marias</em> é um convite ao desassossego: um voo por
-          paisagens internas onde sombras, luzes e verdades ancestrais se
-          encontram.
-        </p>
       </article>
     </main>
   );

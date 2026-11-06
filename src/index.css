@@ -297,6 +297,59 @@ button {
   text-align: center;
 }
 
+.editorial-presentation {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 4rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid color-mix(in srgb, var(--antiquegold) 24%, transparent);
+  border-radius: 16px 3px 16px 3px;
+  background: linear-gradient(145deg, var(--surface), color-mix(in srgb, var(--surface-wine) 16%, var(--surface)));
+  box-shadow: 0 16px 38px rgb(0 0 0 / 18%);
+}
+
+.editorial-presentation > .section-kicker {
+  margin-bottom: 0.35rem;
+  color: var(--antiquegold);
+}
+
+.editorial-presentation h2 {
+  margin: 0 0 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--antiquegold) 32%, transparent);
+  color: var(--lightgolden);
+}
+
+.editorial-presentation blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--muted-text);
+  line-height: 1.8;
+}
+
+.editorial-presentation blockquote p {
+  margin: 0 0 1rem;
+}
+
+.editorial-presentation blockquote p:last-child {
+  margin-bottom: 1.25rem;
+}
+
+.editorial-attribution {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--antiquegold) 22%, transparent);
+  color: var(--lightbeige);
+}
+
+.editorial-attribution span {
+  color: var(--antiquegold);
+  font-size: 0.9rem;
+}
+
 #capa-livro {
   position: relative;
   z-index: 1;

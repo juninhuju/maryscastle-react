@@ -5,9 +5,9 @@ const siteUrl = "https://livroocastelodasmarias.netlify.app";
 
 const routeMetadata = {
   "/": {
-    title: "O Castelo das Marias | Romance de Junior Cristovam",
+    title: "Castelo das Marias | Romance sobrenatural de Junior Cristovam",
     description:
-      "Mergulhe no drama sobrenatural de O Castelo das Marias, de Junior Cristovam. A traição de uma esposa, o ódio, a vingança e os mistérios dos quatro reinos.",
+      "Traído pela esposa, Joaquim atravessa os limites da razão e entra no Castelo das Marias, um bordel enigmático em um mundo paralelo de quatro reinos.",
     image: "/Adaga.webp",
   },
   "/livro": {
@@ -149,6 +149,7 @@ export function getSeoMetadata(pathname) {
       "@context": "https://schema.org",
       "@type": "Book",
       name: siteName,
+      alternateName: "Castelo das Marias",
       headline: metadata.title,
       description: metadata.description,
       url: canonicalUrl,
