@@ -75,9 +75,9 @@ function ReleaseNotice({ children, className = "", standalone = false }) {
           ×
         </button>
       )}
-      <p className="section-kicker">O Castelo das Marias</p>
+      <p className="section-kicker">E-book de O Castelo das Marias</p>
       <Heading id={standalone ? "purchase-page-title" : "release-notice-title"}>
-        Receba o aviso de lançamento
+        Receba o aviso quando o e-book estiver disponível
       </Heading>
       <form className="release-notice-form" onSubmit={handleSubmit}>
         <label htmlFor={standalone ? "purchase-email" : "release-notice-email"}>
@@ -109,7 +109,10 @@ function ReleaseNotice({ children, className = "", standalone = false }) {
               setStatus(null);
             }}
           />
-          <span>Quero receber o aviso de lançamento por e-mail.</span>
+          <span>
+            Quero receber por e-mail o aviso de disponibilidade e da promoção de
+            lançamento do e-book.
+          </span>
         </label>
         <button
           type="submit"

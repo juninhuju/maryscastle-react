@@ -31,12 +31,20 @@ exponha essas credenciais no navegador. Para desenvolvimento local, copie
 `.env.example` para `.env` e preencha as variáveis. O arquivo `.env` não deve
 ser versionado.
 
-### Cadastro para comprar o livro
+### Página de compra do livro
 
-Compartilhe `/comprar` nos links de Reels e Stories para abrir diretamente o
-formulário de e-mail. Os botões de compra do site abrem o mesmo cadastro em uma
-janela curta. O formulário usa a função Netlify `POST /api/book-interest`, que
-grava os dados no Back4App sem expor a Master Key no navegador.
+Compartilhe `/comprar` para apresentar os links da edição física na UICLAP e na
+Amazon. A página inicial também exibe esses links. Preço e frete são consultados
+diretamente nas lojas; o site não raspa essas páginas nem mostra valores que
+podem ficar desatualizados. Os endereços ficam centralizados em
+`src/data/bookStores.js`.
+
+### Cadastros antigos de aviso de lançamento
+
+O formulário de aviso foi substituído pelos links de compra. Para consultar
+cadastros feitos antes da publicação, mantenha a classe `AvisoLancamento` no
+Back4App e configure `PARSE_APP_ID` e `PARSE_MASTER_KEY` nas variáveis de
+ambiente do Netlify, como descrito abaixo.
 
 Crie a classe `AvisoLancamento` no painel do Back4App (Database > Create a
 Class). A função usa `PARSE_APP_ID` e `PARSE_MASTER_KEY`, configuradas como

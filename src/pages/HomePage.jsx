@@ -2,12 +2,22 @@ import { Link } from "react-router-dom";
 import Sinopse from "../components/Sinopse";
 import CardReino from "../components/CardReino";
 import Comentario from "../components/Comentario";
-import ReleaseNotice from "../components/ReleaseNotice";
+import BookPurchaseOptions from "../components/BookPurchaseOptions";
+import EbookPromotion from "../components/EbookPromotion";
 import { reinos } from "../data/reinos";
 
 function HomePage() {
   return (
     <main className="container-fluid page-home">
+      <section
+        className="home-commerce"
+        id="compra-livro"
+        aria-label="Compre o livro físico ou receba o aviso do e-book"
+      >
+        <BookPurchaseOptions compact />
+        <EbookPromotion compact />
+      </section>
+
       <section className="home-hero" aria-labelledby="home-title">
         <div className="home-hero-copy">
           <p className="section-kicker">Romance sobrenatural · fantasia gótica</p>
@@ -32,10 +42,6 @@ function HomePage() {
               <span>Veja qual reino chama por você</span>
             </Link>
           </div>
-          <ReleaseNotice className="home-purchase-button purchase-button">
-            Comprar o livro
-            <span aria-hidden="true">→</span>
-          </ReleaseNotice>
         </div>
 
         <div className="home-cover-frame">

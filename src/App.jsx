@@ -13,7 +13,8 @@ import KingdomPage from "./pages/KingdomPage";
 import AdminPage from "./pages/AdminPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SEO from "./components/SEO";
-import ReleaseNotice from "./components/ReleaseNotice";
+import BookPurchaseOptions from "./components/BookPurchaseOptions";
+import EbookPromotion from "./components/EbookPromotion";
 
 function PageReset() {
   const { pathname } = useLocation();
@@ -46,7 +47,17 @@ export function AppContent() {
         <Routes>
           <Route path="/junioradm" element={<AdminPage />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/comprar" element={<ReleaseNotice standalone />} />
+          <Route
+            path="/comprar"
+            element={
+              <main className="purchase-page">
+                <div className="purchase-page-panel">
+                  <BookPurchaseOptions />
+                  <EbookPromotion />
+                </div>
+              </main>
+            }
+          />
           <Route path="/livro" element={<LivroPage />} />
           <Route path="/livro/:chapter" element={<LivroPage />} />
           <Route path="/quiz" element={<QuizPage />} />

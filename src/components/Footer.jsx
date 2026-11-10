@@ -10,6 +10,22 @@ function Footer() {
         <nav className="footer-links" aria-label="Redes sociais e contato">
             <a
               className="footer-link"
+              href="/#compra-livro"
+              aria-label="Ir para a seção de compra do livro"
+              title="Comprar o livro"
+            >
+              <svg
+                className="footer-icon footer-icon-cart"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 8H6" />
+                <circle cx="10" cy="19" r="1.25" />
+                <circle cx="18" cy="19" r="1.25" />
+              </svg>
+            </a>
+            <a
+              className="footer-link"
               href="https://www.instagram.com/ocastelodasmarias/"
               target="_blank"
               rel="noreferrer"

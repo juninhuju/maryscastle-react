@@ -2,13 +2,38 @@ import capitulos from "./capitulos.json";
 
 const siteName = "O Castelo das Marias";
 const siteUrl = "https://livroocastelodasmarias.netlify.app";
+const bookCoverUrl = `${siteUrl}/Capalivro.jpeg`;
+const bookStoreUrls = [
+  "https://loja.uiclap.com/titulo/ua217132",
+  "https://www.amazon.com.br/dp/B0HPWR8G7K",
+];
+
+function getBookStructuredData(description) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: siteName,
+    alternateName: "Castelo das Marias",
+    description,
+    url: `${siteUrl}/`,
+    image: bookCoverUrl,
+    genre: ["Romance sobrenatural", "Fantasia gótica"],
+    author: {
+      "@type": "Person",
+      name: "Junior Cristovam",
+      url: `${siteUrl}/autor/`,
+    },
+    sameAs: bookStoreUrls,
+    inLanguage: "pt-BR",
+  };
+}
 
 const routeMetadata = {
   "/": {
-    title: "Castelo das Marias | Romance sobrenatural de Junior Cristovam",
+    title: "O Castelo das Marias | Livro de fantasia de Junior Cristovam",
     description:
-      "Traído pela esposa, Joaquim atravessa os limites da razão e entra no Castelo das Marias, um bordel enigmático em um mundo paralelo de quatro reinos.",
-    image: "/Adaga.webp",
+      "Romance sobrenatural de Junior Cristovam. Compre o livro físico na UICLAP ou Amazon. E-book em breve: cadastre-se para a promoção de lançamento por R$ 19,90.",
+    image: "/Capalivro.jpeg",
   },
   "/livro": {
     title:
@@ -18,10 +43,10 @@ const routeMetadata = {
     image: "/Adaga.webp",
   },
   "/comprar": {
-    title: "Aviso de lançamento | O Castelo das Marias",
+    title: "Comprar O Castelo das Marias | UICLAP, Amazon e e-book",
     description:
-      "Cadastre seu e-mail para receber um aviso quando O Castelo das Marias estiver disponível.",
-    image: "/Adaga.webp",
+      "Compre a edição física de O Castelo das Marias na UICLAP ou Amazon. Cadastre-se para receber o aviso do e-book e a promoção de lançamento: de R$ 29,90 por R$ 19,90.",
+    image: "/Capalivro.jpeg",
   },
   "/quiz": {
     title: "Quiz dos Reinos: descubra sua afinidade | Castelo das Marias",
@@ -93,7 +118,6 @@ export function getSeoMetadata(pathname) {
   const normalizedPath =
     pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
   const isAdminRoute = normalizedPath === "/junioradm";
-  const isCampaignRoute = normalizedPath === "/comprar";
   const chapterMatch = normalizedPath.match(/^\/livro(?:\/(\d+))?$/);
   const chapterNumber = Number(chapterMatch?.[1] || 1);
   const chapterTitle = capitulos.find(
@@ -145,20 +169,18 @@ export function getSeoMetadata(pathname) {
   };
 
   if (normalizedPath === "/") {
+    structuredData = getBookStructuredData(metadata.description);
+  } else if (normalizedPath === "/comprar") {
     structuredData = {
       "@context": "https://schema.org",
-      "@type": "Book",
-      name: siteName,
-      alternateName: "Castelo das Marias",
-      headline: metadata.title,
+      "@type": "WebPage",
+      name: metadata.title,
       description: metadata.description,
       url: canonicalUrl,
-      image: imageUrl,
-      author: {
-        "@type": "Person",
-        name: "Junior Cristovam",
-      },
-      inLanguage: "pt-BR",
+      primaryImageOfPage: imageUrl,
+      mainEntity: getBookStructuredData(
+        "Romance sobrenatural de Junior Cristovam, disponível em edição física na UICLAP e na Amazon.",
+      ),
     };
   } else if (chapterMatch && chapterTitle) {
     structuredData = {
@@ -194,7 +216,7 @@ export function getSeoMetadata(pathname) {
     canonicalUrl,
     imageUrl,
     isNotFound,
-    noIndex: isNotFound || isAdminRoute || isCampaignRoute,
+    noIndex: isNotFound || isAdminRoute,
     structuredData,
   };
 }

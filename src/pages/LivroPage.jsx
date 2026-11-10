@@ -1,7 +1,6 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link, useParams } from "react-router-dom";
 import capitulos from "../data/capitulos.json";
-import ReleaseNotice from "../components/ReleaseNotice";
 import NotFoundPage from "./NotFoundPage";
 
 function DownloadIcon() {
@@ -271,9 +270,12 @@ function LivroPage() {
             com suas escolhas.
           </p>
           <div className="chapter-end-actions">
-            <ReleaseNotice className="btn purchase-button chapter-end-purchase">
-              Comprar o livro
-            </ReleaseNotice>
+            <Link
+              className="btn purchase-button chapter-end-purchase"
+              to="/comprar"
+            >
+              Comprar livro físico
+            </Link>
             <Link to="/reinos" className="btn btn-secondary">
               Conhecer os reinos
             </Link>

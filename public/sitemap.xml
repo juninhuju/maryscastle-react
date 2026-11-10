@@ -5,13 +5,29 @@
   <!-- Home -->
   <url>
     <loc>https://livroocastelodasmarias.netlify.app/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-10</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
     <image:image>
       <image:loc>https://livroocastelodasmarias.netlify.app/livro.webp</image:loc>
       <image:title>Capa de O Castelo das Marias - Romance Sobrenatural</image:title>
       <image:caption>Capa oficial do livro O Castelo das Marias por Junior Cristovam</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://livroocastelodasmarias.netlify.app/Capalivro.jpeg</image:loc>
+      <image:title>Capa da edição física de O Castelo das Marias</image:title>
+    </image:image>
+  </url>
+
+  <!-- Onde comprar -->
+  <url>
+    <loc>https://livroocastelodasmarias.netlify.app/comprar/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+    <image:image>
+      <image:loc>https://livroocastelodasmarias.netlify.app/Capalivro.jpeg</image:loc>
+      <image:title>Compre O Castelo das Marias na UICLAP e na Amazon</image:title>
     </image:image>
   </url>
 
