@@ -9,7 +9,7 @@ export const bookStores = [
   },
 ];
 
-export const ebookCheckoutUrl = "https://pay.kiwify.com.br/8uOPIBx";
+export const ebookCheckoutUrl = "https://pay.kiwify.com.br/lIKnfvZ";
 
 export const ebookProduct = {
   checkoutUrl: ebookCheckoutUrl,
