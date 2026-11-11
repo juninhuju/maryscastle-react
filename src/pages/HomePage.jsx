@@ -12,7 +12,7 @@ function HomePage() {
       <section
         className="home-commerce"
         id="compra-livro"
-        aria-label="Compre o livro físico ou receba o aviso do e-book"
+        aria-label="Compre o livro físico ou o e-book em PDF"
       >
         <BookPurchaseOptions compact />
         <EbookPromotion compact />

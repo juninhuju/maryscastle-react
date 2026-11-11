@@ -1,19 +1,15 @@
 import { sign } from "node:crypto";
-import nodemailer from "nodemailer";
 import {
   getAdminConfiguration,
   isAdminSessionValid,
   isSameOrigin,
   jsonResponse,
-  passwordsMatch,
   readJsonBody,
 } from "./utils/admin-auth.mjs";
 
 const PARSE_PAGE_SIZE = 1000;
 const MAX_PARSE_OBJECTS = 10000;
 const MAX_ORDER_ROWS = 2500;
-const MAX_CAMPAIGN_RECIPIENTS = 450;
-const SENDER_EMAIL = "ocastelodasmarias@gmail.com";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const GOOGLE_SHEETS_API = "https://sheets.googleapis.com/v4/spreadsheets";
 
@@ -77,150 +73,10 @@ async function fetchParseClass(className, fields, where = {}) {
   return { results, truncated: true };
 }
 
-function validEmail(value) {
-  return (
-    typeof value === "string" &&
-    value.length <= 254 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-  );
-}
-
-function emailRequestError(code, status = 400) {
-  const error = new Error(code);
-  error.code = code;
-  error.status = status;
-  return error;
-}
-
-async function sendAdministratorEmail(body) {
-  if (
-    typeof body.password !== "string" ||
-    body.password.length > 256 ||
-    !passwordsMatch(body.password, getAdminConfiguration().password)
-  ) {
-    throw emailRequestError("invalid-credentials", 401);
-  }
-
-  if (
-    !["test", "subscribers"].includes(body.mode) ||
-    typeof body.subject !== "string" ||
-    !body.subject.trim() ||
-    body.subject.trim().length > 200 ||
-    /[\r\n]/.test(body.subject) ||
-    typeof body.text !== "string" ||
-    !body.text.trim() ||
-    body.text.length > 5000
-  ) {
-    throw emailRequestError("invalid-email-request");
-  }
-  if (body.mode === "test" && !validEmail(body.to)) {
-    throw emailRequestError("invalid-email-recipient");
-  }
-
-  const appPassword = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "");
-  if (!appPassword) {
-    throw emailRequestError("email-not-configured", 503);
-  }
-
-  let recipients;
-  if (body.mode === "test") {
-    recipients = [body.to.trim().toLowerCase()];
-  } else {
-    const emailData = await fetchParseClass(
-      "AvisoLancamento",
-      ["email"],
-      { consentimento: true },
-    );
-    if (emailData.truncated) {
-      throw emailRequestError("email-list-truncated", 409);
-    }
-
-    recipients = [
-      ...new Set(
-        emailData.results
-          .map(({ email }) =>
-            typeof email === "string" ? email.trim().toLowerCase() : "",
-          )
-          .filter(validEmail),
-      ),
-    ];
-    if (!recipients.length) {
-      throw emailRequestError("no-subscribed-emails", 409);
-    }
-    if (recipients.length > MAX_CAMPAIGN_RECIPIENTS) {
-      throw emailRequestError("email-recipient-limit", 409);
-    }
-  }
-
-  const transport = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: { user: SENDER_EMAIL, pass: appPassword },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 20000,
-  });
-
-  const messageText = [
-    body.text.trim(),
-    "",
-    "---",
-    "Você recebe esta mensagem porque se cadastrou para receber novidades de O Castelo das Marias.",
-    `Para deixar de receber estes e-mails, responda a esta mensagem ou escreva para ${SENDER_EMAIL}.`,
-  ].join("\n");
-
-  try {
-    const delivery = await transport.sendMail({
-      from: { name: "O Castelo das Marias", address: SENDER_EMAIL },
-      to: body.mode === "test" ? recipients[0] : SENDER_EMAIL,
-      ...(body.mode === "subscribers" && { bcc: recipients }),
-      replyTo: SENDER_EMAIL,
-      subject: body.subject.trim(),
-      text: messageText,
-    });
-
-    const accepted = new Set(
-      (delivery.accepted || []).map((address) =>
-        String(address).toLowerCase(),
-      ),
-    );
-    const acceptedCount = recipients.filter((address) =>
-      accepted.has(address),
-    ).length;
-    if (!acceptedCount) {
-      throw emailRequestError("email-send-failed", 502);
-    }
-
-    return {
-      mode: body.mode,
-      recipientCount: acceptedCount,
-      rejectedCount: recipients.length - acceptedCount,
-      recipient: body.mode === "test" ? recipients[0] : undefined,
-    };
-  } finally {
-    transport.close();
-  }
-}
-
 async function loadDashboard() {
-  const [emailData, commentData] = await Promise.all([
-    fetchParseClass("AvisoLancamento", [
-      "email",
-      "consentimento",
-      "origem",
-    ]),
-    fetchParseClass("Comentario", ["nome", "texto"]),
-  ]);
+  const commentData = await fetchParseClass("Comentario", ["nome", "texto"]);
 
   return {
-    emails: emailData.results.map(({ email, consentimento, origem, createdAt }) => ({
-      email: typeof email === "string" ? email : "",
-      consentimento: consentimento === true,
-      origem: typeof origem === "string" ? origem : "",
-      createdAt: typeof createdAt === "string" ? createdAt : "",
-    })),
-    emailListTruncated: emailData.truncated,
     comments: commentData.results.map(
       ({ objectId, nome, texto, createdAt }) => ({
         objectId: typeof objectId === "string" ? objectId : "",
@@ -379,40 +235,6 @@ export default async function handler(request) {
     body = await readJsonBody(request, 24000);
   } catch {
     return jsonResponse({ error: "invalid-request" }, 400);
-  }
-
-  if (body.action === "send-email") {
-    try {
-      return jsonResponse(await sendAdministratorEmail(body));
-    } catch (error) {
-      if (error.code === "invalid-credentials") {
-        return jsonResponse({ error: error.code }, error.status);
-      }
-      if (error.code?.startsWith("invalid-email-")) {
-        return jsonResponse({ error: error.code }, error.status || 400);
-      }
-      if (
-        [
-          "email-not-configured",
-          "email-list-truncated",
-          "email-recipient-limit",
-          "no-subscribed-emails",
-        ].includes(error.code)
-      ) {
-        return jsonResponse({ error: error.code }, error.status);
-      }
-      if (error.code === "email-send-failed") {
-        return jsonResponse({ error: error.code }, error.status);
-      }
-      if (error.message === "Back4App server credentials are not configured.") {
-        return jsonResponse({ error: "email-list-unavailable" }, 503);
-      }
-
-      console.error("Unable to send administrator email.", {
-        code: error.code || "smtp-delivery-error",
-      });
-      return jsonResponse({ error: "email-send-failed" }, 502);
-    }
   }
 
   if (body.action === "refresh-orders") {

@@ -1,4 +1,5 @@
-import ReleaseNotice from "./ReleaseNotice";
+import { Link } from "react-router-dom";
+import { ebookProduct } from "../data/bookStores";
 
 function EbookPromotion({ compact = false }) {
   return (
@@ -7,18 +8,34 @@ function EbookPromotion({ compact = false }) {
       aria-labelledby="ebook-promotion-title"
     >
       <div className="ebook-promotion-copy">
-        <p className="section-kicker">E-book em breve</p>
-        <h2 id="ebook-promotion-title">Garanta o preço de lançamento</h2>
+        <p className="section-kicker">O Castelo das Marias</p>
+        <h2 id="ebook-promotion-title">E-book</h2>
         <p>
-          Receba o aviso de disponibilidade e aproveite a promoção de lançamento.
+          Formato PDF · {ebookProduct.pageCount} páginas
         </p>
       </div>
-      <p className="ebook-release-price">
-        De <s>R$ 29,90</s> por <strong>R$ 19,90</strong>
-      </p>
-      <ReleaseNotice className="ebook-notice-button purchase-button">
-        Avise-me do lançamento
-      </ReleaseNotice>
+      <div className="ebook-presale-offer">
+        <p className="ebook-presale-kicker">Oferta especial do e-book</p>
+        <p className="ebook-presale-price">
+          <span>
+            De <del>{ebookProduct.formattedRegularPrice}</del> por
+          </span>
+          <strong>{ebookProduct.formattedPrice}</strong>
+        </p>
+        <div className="ebook-offer-action">
+          <Link
+            className="ebook-buy-button purchase-button"
+            to="/comprar"
+            aria-label={`Ver detalhes do e-book em formato PDF, de ${ebookProduct.formattedRegularPrice} por ${ebookProduct.formattedPrice}.`}
+          >
+            Ver detalhes do e-book
+          </Link>
+          <p className="ebook-delivery-note">
+            Pagamento à vista no cartão de crédito ou Pix. O acesso é enviado
+            ao e-mail após a confirmação.
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

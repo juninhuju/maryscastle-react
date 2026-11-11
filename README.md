@@ -33,35 +33,21 @@ ser versionado.
 
 ### Página de compra do livro
 
-Compartilhe `/comprar` para apresentar os links da edição física na UICLAP e na
-Amazon. A página inicial também exibe esses links. Preço e frete são consultados
-diretamente nas lojas; o site não raspa essas páginas nem mostra valores que
-podem ficar desatualizados. Os endereços ficam centralizados em
-`src/data/bookStores.js`.
-
-### Cadastros antigos de aviso de lançamento
-
-O formulário de aviso foi substituído pelos links de compra. Para consultar
-cadastros feitos antes da publicação, mantenha a classe `AvisoLancamento` no
-Back4App e configure `PARSE_APP_ID` e `PARSE_MASTER_KEY` nas variáveis de
-ambiente do Netlify, como descrito abaixo.
-
-Crie a classe `AvisoLancamento` no painel do Back4App (Database > Create a
-Class). A função usa `PARSE_APP_ID` e `PARSE_MASTER_KEY`, configuradas como
-variáveis de ambiente do servidor no Netlify; não habilite leitura pública.
-Cada cadastro guarda `email` (normalizado em minúsculas), `consentimento` e
-`origem`; o Back4App também registra a data de criação. Crie um índice único
-para `email` para impedir duplicações simultâneas. Os cadastros ficam disponíveis
-no painel do Back4App em Database > `AvisoLancamento`.
+Compartilhe `/comprar` como página de venda do e-book em PDF na Kiwify. Ela
+informa o formato, 223 páginas, tamanho Letter, tamanho aproximado do arquivo e
+entrega por e-mail após confirmação do pagamento. O preço é R$ 19,90 (de
+R$ 29,90), com pagamento à vista por Pix ou cartão de crédito, sem
+parcelamento. A página também aponta para as opções da edição física na UICLAP
+e na Amazon. O arquivo pago não fica hospedado publicamente no site. O checkout
+e os dados da edição ficam centralizados em `src/data/bookStores.js`.
 
 ## Painel administrativo
 
-O painel fica em `/junioradm`. Ele permite consultar e exportar os e-mails de
-aviso de lançamento, enviar mensagens de teste ou campanhas para inscritos que
-deram consentimento, revisar/remover comentários e atualizar/exportar as
-respostas do formulário de pré-venda conectado a uma planilha do Google Sheets.
-As respostas do formulário são lidas da planilha quando o administrador clica
-em **Atualizar respostas**; elas não são copiadas para o Back4App.
+O painel fica em `/junioradm`. Ele permite revisar/remover comentários e
+atualizar/exportar as respostas do formulário de pré-venda conectado a uma
+planilha do Google Sheets. As respostas do formulário são lidas da planilha
+quando o administrador clica em **Atualizar respostas**; elas não são copiadas
+para o Back4App.
 Na seção de pré-venda, também é possível importar um CSV exportado do Google
 Forms com as colunas de carimbo de data/hora, nome, e-mail, telefone, cidade,
 endereço, quantidade e forma de pagamento. O arquivo é lido localmente no
@@ -84,7 +70,6 @@ Site configuration > Environment variables** e faça um novo deploy:
 | `ADMIN_SESSION_SECRET` | Segredo aleatório de assinatura das sessões; use pelo menos 32 caracteres. |
 | `PARSE_APP_ID` | Application ID da aplicação Back4App. |
 | `PARSE_MASTER_KEY` | Master Key da aplicação Back4App; fica somente no servidor. |
-| `GMAIL_APP_PASSWORD` | Senha de app do Gmail usado como remetente `ocastelodasmarias@gmail.com`; somente no servidor. |
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | E-mail da conta de serviço Google com acesso de leitura à planilha. |
 | `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` | Chave privada da conta de serviço; mantenha somente como variável segura no Netlify. |
 | `GOOGLE_SHEET_ID` | ID da planilha vinculada às respostas do formulário. |
@@ -110,27 +95,11 @@ Para habilitar as respostas do formulário:
    `GOOGLE_SHEET_ID`.
 6. Após salvar as variáveis, faça novo deploy e acesse `/junioradm`.
 
-### Envio de e-mails pelo painel
-
-O painel envia pelo endereço já exibido no rodapé: `ocastelodasmarias@gmail.com`.
-Para habilitar o envio, ative a verificação em duas etapas nessa conta Google,
-gere uma **senha de app** para e-mail e salve-a como `GMAIL_APP_PASSWORD` nas
-variáveis seguras do Netlify. Não use a senha normal da conta e não coloque a
-senha de app no navegador ou no repositório.
-
-Na seção **Enviar e-mail**, informe o assunto e o texto simples da mensagem.
-Escolha um endereço para enviar um teste ou os inscritos que consentiram. O
-envio em massa exige a senha administrativa novamente, envia os destinatários
-em cópia oculta e inclui uma cópia para o endereço do remetente. As mensagens
-informam como pedir a remoção da lista por resposta ao e-mail. Por segurança,
-uma campanha é limitada a 450 endereços por envio; para listas maiores, use um
-serviço próprio de campanhas.
-
 O acesso usa senha validada no servidor e cookie de sessão `HttpOnly`,
 `SameSite=Strict`, com validade de oito horas. Os dados administrativos e a
 Master Key nunca são enviados ao navegador sem autenticação. O painel carrega
-até 10.000 e-mails/comentários e 2.500 respostas por atualização; se houver
-mais registros, exporte a lista completa diretamente na fonte de dados.
+até 10.000 comentários e 2.500 respostas por atualização; se houver mais
+registros, exporte a lista completa diretamente na fonte de dados.
 
 ## Estrutura
 

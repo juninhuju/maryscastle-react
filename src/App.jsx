@@ -12,9 +12,8 @@ import AutorPage from "./pages/AutorPage";
 import KingdomPage from "./pages/KingdomPage";
 import AdminPage from "./pages/AdminPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import EbookPurchasePage from "./pages/EbookPurchasePage";
 import SEO from "./components/SEO";
-import BookPurchaseOptions from "./components/BookPurchaseOptions";
-import EbookPromotion from "./components/EbookPromotion";
 
 function PageReset() {
   const { pathname } = useLocation();
@@ -49,14 +48,7 @@ export function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route
             path="/comprar"
-            element={
-              <main className="purchase-page">
-                <div className="purchase-page-panel">
-                  <BookPurchaseOptions />
-                  <EbookPromotion />
-                </div>
-              </main>
-            }
+            element={<EbookPurchasePage />}
           />
           <Route path="/livro" element={<LivroPage />} />
           <Route path="/livro/:chapter" element={<LivroPage />} />

@@ -2989,6 +2989,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
+  gap: 0.65rem 0.9rem;
   border-left: 1px solid color-mix(in srgb, var(--antiquegold) 28%, transparent);
 }
 
@@ -3004,26 +3005,20 @@ button {
   font-size: 1.2rem;
 }
 
-.home-commerce .ebook-promotion .ebook-release-price {
-  font-size: 0.88rem;
+.home-commerce .ebook-presale-offer {
+  grid-column: 1 / -1;
 }
 
-.home-commerce .ebook-promotion .ebook-notice-button {
-  min-height: 0;
-  padding: 0.35rem 0.55rem;
-  border: 1px solid color-mix(in srgb, var(--antiquegold) 55%, transparent);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--muted-text);
-  font-size: 0.72rem;
+.home-commerce .ebook-promotion .ebook-buy-button {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
-.home-commerce .ebook-promotion .ebook-notice-button:hover,
-.home-commerce .ebook-promotion .ebook-notice-button:focus-visible {
-  border-color: var(--lightgolden);
-  background: color-mix(in srgb, var(--warmbrown) 18%, transparent);
-  color: var(--lightgolden);
+.home-commerce .ebook-promotion .ebook-buy-button:hover,
+.home-commerce .ebook-promotion .ebook-buy-button:focus-visible {
   box-shadow: none;
 }
 
@@ -3075,28 +3070,88 @@ button {
   font-size: 0.86rem;
 }
 
-.ebook-release-price {
-  flex: 0 0 auto;
+.ebook-presale-offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 13rem);
+  align-items: center;
+  gap: 0.7rem 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--lightgolden) 45%, transparent);
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--warmbrown) 40%, transparent), transparent 80%),
+    color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.ebook-presale-kicker {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--lightgolden);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.ebook-presale-offer .ebook-presale-kicker,
+.ebook-purchase-presale .ebook-purchase-presale-kicker {
+  grid-column: 1 / -1;
+}
+
+.ebook-presale-price {
+  display: grid;
+  justify-items: start;
+  gap: 0.35rem;
   margin: 0;
   color: var(--muted-text);
-  white-space: nowrap;
+  font-size: 0.82rem;
 }
 
-.ebook-release-price s {
-  opacity: 0.8;
+.ebook-offer-action {
+  display: grid;
+  justify-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
 }
 
-.ebook-release-price strong {
+.ebook-presale-price > span,
+.ebook-purchase-prices > span {
+  font-size: 0.82rem;
+}
+
+.ebook-presale-price del {
+  margin: 0 0.15rem;
+  opacity: 0.7;
+}
+
+.ebook-presale-price strong {
   color: var(--lightgolden);
-  font-size: 1.15rem;
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
-.ebook-notice-button {
+.ebook-buy-button {
   min-height: 2.6rem;
   padding: 0.55rem 0.9rem;
   border-radius: 999px;
   font-size: 0.85rem;
+  text-align: center;
+  text-decoration: none;
   white-space: nowrap;
+}
+
+.ebook-delivery-note {
+  margin: 0;
+  color: var(--muted-text);
+  font-size: 0.73rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.ebook-delivery-note strong {
+  color: var(--lightgolden);
 }
 
 .ebook-promotion.compact {
@@ -3124,188 +3179,9 @@ button {
   flex-wrap: wrap;
 }
 
-.release-notice {
-  position: fixed;
-  inset: 0;
-  width: min(38rem, calc(100% - 2rem));
-  max-width: none;
-  max-height: calc(100vh - 2rem);
-  max-height: calc(100dvh - 2rem);
-  margin: auto;
-  padding: 0;
-  overflow-y: auto;
-  border: 1px solid color-mix(in srgb, var(--antiquegold) 48%, transparent);
-  border-radius: 1.25rem;
-  background: linear-gradient(145deg, var(--surface-raised), var(--surface-wine));
-  color: var(--lightbeige);
-  box-shadow: 0 18px 60px rgb(0 0 0 / 48%);
-}
-
-.release-notice::backdrop {
-  background: rgb(9 6 7 / 70%);
-  backdrop-filter: blur(4px);
-}
-
-.release-notice-content {
-  position: relative;
-  padding: clamp(2rem, 6vw, 3rem);
-  text-align: center;
-}
-
-.release-notice-content h1,
-.release-notice-content h2 {
-  margin: 0 0 0.75rem;
-  color: var(--lightgolden);
-  font-family: var(--font-title);
-  font-size: clamp(1.5rem, 4vw, 2rem);
-}
-
-.release-notice-content > p:not(.section-kicker) {
-  color: var(--muted-text);
-  line-height: 1.7;
-}
-
-.release-notice-form {
-  display: grid;
-  gap: 0.65rem;
-  max-width: 27rem;
-  margin: 1.25rem auto 0;
-  text-align: left;
-}
-
-.release-notice-form > label:first-child {
-  color: var(--lightgolden);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.release-notice-form > input[type="email"] {
-  width: 100%;
-  min-height: 2.8rem;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--antiquegold) 42%, transparent);
-  border-radius: 6px;
-  background: var(--blackabsolut);
-  color: var(--lightbeige);
-  font: inherit;
-}
-
-.release-notice-form > input[type="email"]:focus-visible {
-  outline: 2px solid var(--lightgolden);
-  outline-offset: 2px;
-}
-
-.release-notice-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.55rem;
-  color: var(--muted-text);
-  font-size: 0.74rem;
-  line-height: 1.5;
-}
-
-.release-notice-consent input {
-  flex: 0 0 auto;
-  margin-top: 0.15rem;
-  accent-color: var(--warmbrown);
-}
-
-.release-notice-submit {
-  justify-self: stretch;
-  min-height: 2.5rem;
-  margin-top: 0.25rem;
-  padding: 0.55rem 0.9rem;
-  border-radius: 6px;
-  background: var(--warmbrown);
-  transition: background-color 0.2s ease;
-}
-
-.release-notice-submit:hover,
-.release-notice-submit:focus-visible {
-  background: color-mix(in srgb, var(--warmbrown) 78%, var(--lightgolden));
-  box-shadow: none;
-  transform: none;
-}
-
-.release-notice-submit:disabled {
-  cursor: wait;
-  opacity: 0.65;
-}
-
-.release-notice-form .release-notice-status,
-.release-notice-status {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  margin: 0.5rem 0 0;
-  padding: 0.75rem;
-  border: 1px solid currentColor;
-  border-radius: 6px;
-  background: color-mix(in srgb, currentColor 8%, var(--surface));
-  font-size: 0.82rem;
-}
-
-.release-notice-status > span {
-  display: grid;
-  width: 1.35rem;
-  height: 1.35rem;
-  flex: 0 0 1.35rem;
-  place-items: center;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  font-weight: 700;
-}
-
-.release-notice-status > p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.release-notice-status.success {
-  color: var(--mist-highlight);
-}
-
-.release-notice-status.already-registered {
-  color: var(--lightgolden);
-}
-
-.release-notice-status.error {
-  color: #ffb3a9;
-}
-
-.release-notice-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--muted-text);
-  font: inherit;
-  font-size: 1.5rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.release-notice-close:hover,
-.release-notice-close:focus-visible {
-  color: var(--lightgolden);
-}
-
-.release-notice-close:focus-visible {
-  outline: 2px solid var(--lightgolden);
-  outline-offset: 3px;
-}
-
 .purchase-page {
-  display: grid;
+  display: block;
   min-height: 100svh;
-  place-items: center;
   padding: clamp(1rem, 5vw, 3rem);
   background:
     radial-gradient(ellipse at 50% 20%, rgb(101 53 49 / 30%), transparent 60%),
@@ -3313,7 +3189,8 @@ button {
 }
 
 .purchase-page-panel {
-  width: min(100%, 38rem);
+  width: min(100%, 62rem);
+  margin: 0 auto;
   border: 1px solid color-mix(in srgb, var(--antiquegold) 48%, transparent);
   border-radius: 1.25rem;
   background: linear-gradient(145deg, var(--surface-raised), var(--surface-wine));
@@ -3321,11 +3198,254 @@ button {
   box-shadow: 0 18px 60px rgb(0 0 0 / 40%);
 }
 
+.ebook-purchase-panel {
+  padding: clamp(1.15rem, 4vw, 2.5rem);
+}
+
+.ebook-purchase-back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--muted-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.ebook-purchase-back:hover,
+.ebook-purchase-back:focus-visible {
+  color: var(--lightgolden);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ebook-purchase-back:focus-visible,
+.ebook-purchase-button:focus-visible,
+.ebook-purchase-support a:focus-visible {
+  outline: 2px solid var(--lightgolden);
+  outline-offset: 4px;
+}
+
+.ebook-purchase-product {
+  display: grid;
+  grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+.ebook-purchase-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid color-mix(in srgb, var(--antiquegold) 35%, transparent);
+  border-radius: 0.45rem;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 32%);
+}
+
+.ebook-purchase-copy .section-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--mist-highlight);
+  text-align: left;
+}
+
+.ebook-purchase-copy h1 {
+  margin: 0;
+  padding: 0 0 0.6rem;
+  color: var(--lightgolden);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.ebook-purchase-description {
+  margin: 0 0 1.25rem;
+  color: var(--muted-text);
+  line-height: 1.65;
+}
+
+.ebook-purchase-presale {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 13rem);
+  align-items: center;
+  gap: 0.7rem 1.25rem;
+  margin: 0 0 1.4rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--lightgolden) 45%, transparent);
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--warmbrown) 40%, transparent), transparent 80%),
+    color-mix(in srgb, var(--surface) 44%, transparent);
+}
+
+.ebook-purchase-presale-kicker {
+  color: var(--lightgolden);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ebook-purchase-presale .ebook-delivery-note {
+  font-size: 0.78rem;
+}
+
+.ebook-purchase-presale .ebook-purchase-presale-kicker {
+  grid-column: 1 / -1;
+}
+
+.ebook-purchase-presale .ebook-offer-action {
+  grid-column: 2;
+  grid-row: 2;
+  justify-items: center;
+  max-width: 13rem;
+  justify-self: center;
+}
+
+.ebook-purchase-presale .ebook-delivery-note {
+  text-align: center;
+}
+
+.ebook-purchase-presale .ebook-purchase-button {
+  justify-self: center;
+}
+
+.ebook-purchase-prices {
+  display: grid;
+  justify-items: start;
+  gap: 0.35rem;
+  margin: 0;
+  color: var(--muted-text);
+}
+
+.ebook-purchase-prices del {
+  margin: 0 0.15rem;
+  opacity: 0.72;
+}
+
+.ebook-purchase-prices strong {
+  color: var(--lightgolden);
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--lightgolden) 18%, transparent);
+}
+
+.ebook-purchase-copy h2,
+.ebook-purchase-how h2 {
+  margin: 0 0 0.85rem;
+  padding: 0;
+  color: var(--lightbeige);
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+.ebook-purchase-checkout + h2 {
+  margin-top: 1.5rem;
+}
+
+.ebook-product-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.15rem 1rem;
+  margin: 0;
+}
+
+.ebook-product-details > div {
+  min-width: 0;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--antiquegold) 20%, transparent);
+}
+
+.ebook-product-details > div:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.ebook-product-details dt {
+  color: var(--muted-text);
+  font-size: 0.77rem;
+}
+
+.ebook-product-details dd {
+  margin: 0.15rem 0 0;
+  color: var(--lightbeige);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.ebook-purchase-button {
+  min-height: 2.7rem;
+  justify-self: start;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ebook-purchase-how {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--antiquegold) 30%, transparent);
+}
+
+.ebook-purchase-how ol {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-left: 1.3rem;
+  color: var(--muted-text);
+  line-height: 1.6;
+}
+
+.ebook-purchase-no-shipping,
+.ebook-purchase-support,
+.ebook-purchase-terms {
+  margin: 1rem 0 0;
+  color: var(--muted-text);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.ebook-purchase-no-shipping {
+  padding: 0.8rem 1rem;
+  border-left: 2px solid var(--antiquegold);
+  background: color-mix(in srgb, var(--surface) 36%, transparent);
+}
+
+.ebook-purchase-support a {
+  color: var(--lightgolden);
+  text-underline-offset: 0.2em;
+}
+
+.ebook-purchase-physical {
+  margin-top: 1.5rem;
+}
+
+.ebook-purchase-physical .book-purchase-options {
+  max-width: none;
+  margin: 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid color-mix(in srgb, var(--antiquegold) 25%, transparent);
+  border-bottom: 0;
+}
+
 @media (max-width: 768px) {
   .book-purchase-options {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.6rem;
+  }
+
+  .ebook-purchase-product {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ebook-purchase-cover {
+    width: min(40%, 12rem);
+    margin: 0 auto;
+  }
+
+  .ebook-purchase-copy h1 {
+    font-size: clamp(1.65rem, 7vw, 2.2rem);
   }
 
   .home-commerce {
@@ -3353,6 +3473,51 @@ button {
 }
 
 @media (max-width: 520px) {
+  .ebook-product-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ebook-product-details > div:nth-last-child(2) {
+    border-bottom: 1px solid color-mix(in srgb, var(--antiquegold) 20%, transparent);
+  }
+
+  .ebook-purchase-button {
+    width: auto;
+    justify-self: start;
+  }
+
+  .ebook-presale-offer {
+    padding: 0.7rem;
+  }
+
+  .ebook-presale-offer,
+  .ebook-purchase-presale {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+  }
+
+  .ebook-purchase-presale .ebook-purchase-presale-kicker {
+    grid-column: 1;
+  }
+
+  .ebook-purchase-presale .ebook-offer-action {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .ebook-purchase-presale .ebook-offer-action {
+    justify-items: center;
+    justify-self: center;
+  }
+
+  .ebook-purchase-presale .ebook-offer-action .ebook-delivery-note {
+    text-align: left;
+  }
+
+  .ebook-offer-action {
+    max-width: 100%;
+  }
+
   .home-commerce .book-purchase-options {
     width: 100%;
   }
@@ -3398,6 +3563,10 @@ button {
     grid-column: 1 / -1;
   }
 
+  .home-commerce .ebook-promotion .ebook-delivery-note {
+    grid-column: 1 / -1;
+  }
+
   .home-commerce .ebook-promotion h2 {
     font-size: 1.08rem;
   }
@@ -3407,19 +3576,9 @@ button {
     line-height: 1.45;
   }
 
-  .home-commerce .ebook-release-price {
-    white-space: normal;
-    font-size: 0.78rem;
-  }
-
-  .home-commerce .ebook-release-price strong {
-    font-size: 0.95rem;
-  }
-
-  .home-commerce .ebook-promotion .ebook-notice-button {
-    min-height: 2.75rem;
-    padding: 0.4rem 0.55rem;
-    font-size: 0.72rem;
+  .home-commerce .ebook-promotion .ebook-buy-button {
+    min-height: 2.6rem;
+    font-size: 0.76rem;
   }
 
   .home-commerce .ebook-promotion.compact {
@@ -3440,7 +3599,7 @@ button {
     font-size: 1.2rem;
   }
 
-  .ebook-notice-button {
+  .ebook-buy-button {
     white-space: normal;
   }
 
@@ -3493,11 +3652,7 @@ button {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .home-commerce .ebook-release-price {
-    white-space: nowrap;
-  }
-
-  .home-commerce .ebook-notice-button {
+  .home-commerce .ebook-buy-button {
     justify-self: start;
   }
 }
@@ -4017,55 +4172,6 @@ button {
   font-size: 0.86rem;
 }
 
-.admin-compose-form {
-  display: grid;
-  gap: 0.55rem;
-  margin-top: 1.15rem;
-}
-
-.admin-compose-form label {
-  margin-top: 0.35rem;
-  color: var(--muted-text);
-  font-size: 0.88rem;
-}
-
-.admin-compose-form input,
-.admin-compose-form textarea,
-.admin-compose-form select {
-  width: 100%;
-  min-height: 2.8rem;
-  padding: 0.7rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--antiquegold) 38%, transparent);
-  border-radius: 8px;
-  background: var(--blackabsolut);
-  color: var(--lightbeige);
-  font: inherit;
-}
-
-.admin-compose-form textarea {
-  min-height: 10rem;
-  line-height: 1.6;
-  resize: vertical;
-}
-
-.admin-compose-form input:focus-visible,
-.admin-compose-form textarea:focus-visible,
-.admin-compose-form select:focus-visible {
-  outline: 2px solid var(--lightgolden);
-  outline-offset: 2px;
-}
-
-.admin-compose-form .admin-compose-hint {
-  margin-top: -0.25rem;
-  color: var(--muted-text);
-  font-size: 0.78rem;
-}
-
-.admin-compose-form .admin-button {
-  justify-self: start;
-  margin-top: 0.6rem;
-}
-
 .admin-table-wrap {
   width: 100%;
   overflow: auto;
@@ -4218,7 +4324,4 @@ button {
     width: 100%;
   }
 
-  .admin-compose-form .admin-button {
-    width: 100%;
-  }
 }

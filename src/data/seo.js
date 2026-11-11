@@ -1,12 +1,9 @@
 import capitulos from "./capitulos.json";
+import { ebookProduct } from "./bookStores";
 
 const siteName = "O Castelo das Marias";
 const siteUrl = "https://livroocastelodasmarias.netlify.app";
 const bookCoverUrl = `${siteUrl}/Capalivro.jpeg`;
-const bookStoreUrls = [
-  "https://loja.uiclap.com/titulo/ua217132",
-  "https://www.amazon.com.br/dp/B0HPWR8G7K",
-];
 
 function getBookStructuredData(description) {
   return {
@@ -23,16 +20,15 @@ function getBookStructuredData(description) {
       name: "Junior Cristovam",
       url: `${siteUrl}/autor/`,
     },
-    sameAs: bookStoreUrls,
     inLanguage: "pt-BR",
   };
 }
 
 const routeMetadata = {
   "/": {
-    title: "O Castelo das Marias | Livro de fantasia de Junior Cristovam",
+    title: "O Castelo das Marias | Livro PDF e físico",
     description:
-      "Romance sobrenatural de Junior Cristovam. Compre o livro físico na UICLAP ou Amazon. E-book em breve: cadastre-se para a promoção de lançamento por R$ 19,90.",
+      `Compre O Castelo das Marias em e-book PDF por ${ebookProduct.formattedPrice} (de ${ebookProduct.formattedRegularPrice}). Pagamento à vista no cartão de crédito ou Pix.`,
     image: "/Capalivro.jpeg",
   },
   "/livro": {
@@ -43,9 +39,8 @@ const routeMetadata = {
     image: "/Adaga.webp",
   },
   "/comprar": {
-    title: "Comprar O Castelo das Marias | UICLAP, Amazon e e-book",
-    description:
-      "Compre a edição física de O Castelo das Marias na UICLAP ou Amazon. Cadastre-se para receber o aviso do e-book e a promoção de lançamento: de R$ 29,90 por R$ 19,90.",
+    title: `Comprar O Castelo das Marias em PDF | ${ebookProduct.formattedPrice}`,
+    description: `Compre O Castelo das Marias em e-book PDF por ${ebookProduct.formattedPrice} (de ${ebookProduct.formattedRegularPrice}). Pagamento à vista no cartão de crédito ou Pix; entrega por e-mail após confirmação.`,
     image: "/Capalivro.jpeg",
   },
   "/quiz": {
@@ -170,6 +165,13 @@ export function getSeoMetadata(pathname) {
 
   if (normalizedPath === "/") {
     structuredData = getBookStructuredData(metadata.description);
+    structuredData.offers = {
+      "@type": "Offer",
+      price: ebookProduct.price,
+      priceCurrency: "BRL",
+      url: ebookProduct.checkoutUrl,
+      description: `E-book em formato PDF. De ${ebookProduct.formattedRegularPrice} por ${ebookProduct.formattedPrice}; pagamento à vista no cartão de crédito ou Pix.`,
+    };
   } else if (normalizedPath === "/comprar") {
     structuredData = {
       "@context": "https://schema.org",
@@ -179,8 +181,18 @@ export function getSeoMetadata(pathname) {
       url: canonicalUrl,
       primaryImageOfPage: imageUrl,
       mainEntity: getBookStructuredData(
-        "Romance sobrenatural de Junior Cristovam, disponível em edição física na UICLAP e na Amazon.",
+        `E-book de O Castelo das Marias em formato PDF por ${ebookProduct.formattedPrice} (de ${ebookProduct.formattedRegularPrice}).`,
       ),
+    };
+    structuredData.mainEntity.bookFormat = "https://schema.org/EBook";
+    structuredData.mainEntity.numberOfPages = ebookProduct.pageCount;
+    structuredData.mainEntity.encodingFormat = "application/pdf";
+    structuredData.mainEntity.offers = {
+      "@type": "Offer",
+      price: ebookProduct.price,
+      priceCurrency: "BRL",
+      url: ebookProduct.checkoutUrl,
+      description: `Pagamento à vista no cartão de crédito ou Pix. De ${ebookProduct.formattedRegularPrice} por ${ebookProduct.formattedPrice}.`,
     };
   } else if (chapterMatch && chapterTitle) {
     structuredData = {
