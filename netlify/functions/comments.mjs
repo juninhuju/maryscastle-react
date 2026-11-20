@@ -1,11 +1,47 @@
-import {
-  isSameOrigin,
-  jsonResponse,
-  readJsonBody,
-} from "./utils/admin-auth.mjs";
-
 const DEFAULT_PARSE_SERVER_URL = "https://parseapi.back4app.com";
 const COMMENT_FIELDS = "objectId,createdAt,nome,texto";
+
+function jsonResponse(body, status = 200, headers = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "Cache-Control": "no-store, private",
+      "Content-Type": "application/json; charset=utf-8",
+      "X-Content-Type-Options": "nosniff",
+      ...headers,
+    },
+  });
+}
+
+function isSameOrigin(request) {
+  const origin = request.headers.get("origin");
+  if (!origin) return false;
+
+  try {
+    return new URL(origin).host === new URL(request.url).host;
+  } catch {
+    return false;
+  }
+}
+
+async function readJsonBody(request, maximumBytes = 4096) {
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > maximumBytes) {
+    throw new Error("Request body is too large.");
+  }
+
+  const text = await request.text();
+  if (Buffer.byteLength(text) > maximumBytes) {
+    throw new Error("Request body is too large.");
+  }
+
+  const body = JSON.parse(text);
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    throw new Error("Request body must be a JSON object.");
+  }
+
+  return body;
+}
 
 function getParseConfiguration() {
   const applicationId = process.env.PARSE_APP_ID;

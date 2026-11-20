@@ -1,5 +1,2 @@
 /api/comments /.netlify/functions/comments 200
-/api/admin-auth /.netlify/functions/admin-auth 200
-/api/admin-data /.netlify/functions/admin-data 200
-/junioradm /index.html 200
 /* /404.html 404

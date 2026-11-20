@@ -112,7 +112,6 @@ export const prerenderPaths = [
 export function getSeoMetadata(pathname) {
   const normalizedPath =
     pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
-  const isAdminRoute = normalizedPath === "/junioradm";
   const chapterMatch = normalizedPath.match(/^\/livro(?:\/(\d+))?$/);
   const chapterNumber = Number(chapterMatch?.[1] || 1);
   const chapterTitle = capitulos.find(
@@ -128,18 +127,14 @@ export function getSeoMetadata(pathname) {
           image: "/Adaga.webp",
         }
       : null;
-  const metadata = isAdminRoute
-    ? {
-        title: `Administração | ${siteName}`,
-        description: "Área administrativa restrita.",
-        image: "/livro.webp",
-      }
-    : chapterMetadata || routeMetadata[normalizedPath] ||
-      kingdomMetadata[normalizedPath] || {
+  const metadata =
+    chapterMetadata ||
+    routeMetadata[normalizedPath] ||
+    kingdomMetadata[normalizedPath] || {
       title: `Página não encontrada | ${siteName}`,
       description: `A página que você procura não foi encontrada em ${siteName}.`,
       image: "/livro.webp",
-      };
+    };
 
   const isNotFound =
     !chapterMetadata &&
@@ -228,7 +223,7 @@ export function getSeoMetadata(pathname) {
     canonicalUrl,
     imageUrl,
     isNotFound,
-    noIndex: isNotFound || isAdminRoute,
+    noIndex: isNotFound,
     structuredData,
   };
 }
