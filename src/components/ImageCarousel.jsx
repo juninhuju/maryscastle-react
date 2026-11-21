@@ -31,6 +31,7 @@ const descricoesSlides = [
 const slides = Array.from({ length: 25 }, (_, index) => ({
   id: index + 1,
   src: `/carrossel/${index + 1}.jpeg`,
+  webpSrc: `/carrossel/${index + 1}.webp`,
   description:
     descricoesSlides[index] ||
     `Arte conceitual de fantasia sobrenatural do universo de O Castelo das Marias, cena ${index + 1}.`,
@@ -86,11 +87,14 @@ function ImageCarousel() {
       <div className="carousel-stage">
         <div className="carousel-live" aria-live="polite" aria-atomic="true">
           <figure className="carousel-figure">
-            <img
-              src={activeSlide.src}
-              alt={activeSlide.description}
-              className="carousel-image"
-            />
+            <picture>
+              <source srcSet={activeSlide.webpSrc} type="image/webp" />
+              <img
+                src={activeSlide.src}
+                alt={activeSlide.description}
+                className="carousel-image"
+              />
+            </picture>
           </figure>
           <span className="sr-only">
             Imagem {activeIndex + 1} de {slides.length}

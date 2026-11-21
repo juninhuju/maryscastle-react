@@ -13,11 +13,14 @@ function AutorPage() {
       </p>
 
       <figure className="author-figure">
-        <img
-          src="/autor.jpeg"
-          alt="Junior Cristovam, escritor brasileiro autor do romance de fantasia O Castelo das Marias"
-          className="author-photo"
-        />
+        <picture>
+          <source srcSet="/autor.webp" type="image/webp" />
+          <img
+            src="/autor.jpeg"
+            alt="Junior Cristovam, escritor brasileiro autor do romance de fantasia O Castelo das Marias"
+            className="author-photo"
+          />
+        </picture>
         <figcaption>
           Junior Cristovam, autor de <em>O Castelo das Marias</em>
         </figcaption>
