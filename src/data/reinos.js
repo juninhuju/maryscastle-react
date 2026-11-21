@@ -4,7 +4,7 @@ export const reinos = [
     guardiao: "Maria Padilha",
     tratamentoGuardiao: "Guardiã",
     imagemSrc: "/lira.jpeg",
-    rota: "/lira",
+    rota: "/lira/",
     slug: "lira",
     principios:
       "Liberdade, valorização do feminino e transformação pelo autoconhecimento",
@@ -27,7 +27,7 @@ export const reinos = [
     guardiao: "Esdras",
     tratamentoGuardiao: "Guardião",
     imagemSrc: "/natural.jpeg",
-    rota: "/natural",
+    rota: "/natural/",
     slug: "natural",
     principios:
       "Magia ancestral, forças elementais e o equilíbrio sagrado da lei da troca",
@@ -47,7 +47,7 @@ export const reinos = [
     guardiao: "Senhor Caveira",
     tratamentoGuardiao: "Guardião",
     imagemSrc: "/cemiterio.jpeg",
-    rota: "/cemiterio",
+    rota: "/cemiterio/",
     slug: "cemiterio",
     principios:
       "Justiça implacável, lei do retorno e a prestação de contas de cada alma",
@@ -67,7 +67,7 @@ export const reinos = [
     guardiao: "Sete",
     tratamentoGuardiao: "Guardião",
     imagemSrc: "/encruzilhada.jpeg",
-    rota: "/encruzilhada",
+    rota: "/encruzilhada/",
     slug: "encruzilhada",
     principios:
       "Livre-arbítrio, encruzilhada de escolhas e a inevitabilidade das consequências",

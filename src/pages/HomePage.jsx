@@ -4,6 +4,7 @@ import CardReino from "../components/CardReino";
 import Comentario from "../components/Comentario";
 import BookPurchaseOptions from "../components/BookPurchaseOptions";
 import EbookPromotion from "../components/EbookPromotion";
+import { VideoTrailerPlayer } from "../components/VideoTrailerSection";
 import { reinos } from "../data/reinos";
 
 function HomePage() {
@@ -31,12 +32,12 @@ function HomePage() {
           </p>
 
           <div className="home-quick-actions" aria-label="Comece por aqui">
-            <Link to="/livro" className="quick-action quick-action-primary">
+            <Link to="/livro/" className="quick-action quick-action-primary">
               <span className="quick-action-kicker">Leitura gratuita</span>
               <strong>Ler os quatro primeiros capítulos</strong>
               <span>Conheça o início da jornada de Joaquim</span>
             </Link>
-            <Link to="/quiz" className="quick-action quick-action-secondary">
+            <Link to="/quiz/" className="quick-action quick-action-secondary">
               <span className="quick-action-kicker">Descubra seu destino</span>
               <strong>Fazer o quiz</strong>
               <span>Veja qual reino chama por você</span>
@@ -45,13 +46,7 @@ function HomePage() {
         </div>
 
         <div className="home-cover-frame">
-          <img
-            fetchPriority="high"
-            decoding="async"
-            alt="O livro O Castelo das Marias fotografado sobre uma mesa de madeira em uma biblioteca iluminada por velas."
-            id="capa-livro"
-            src="/Capalivro.jpeg"
-          />
+          <VideoTrailerPlayer />
           <span className="home-cover-caption">
             Uma travessia por reinos sobrenaturais e horrores ocultos
           </span>
@@ -113,7 +108,7 @@ function HomePage() {
             sala, era um covil.”
           </blockquote>
           <Link
-            to="/livro"
+            to="/livro/"
             className="chapter-cover-link"
             aria-label="Ler os quatro primeiros capítulos de O Castelo das Marias"
           >

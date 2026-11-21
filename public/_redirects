@@ -1,2 +1,4 @@
 /api/comments /.netlify/functions/comments 200
+/livro/1 /livro/ 301
+/livro/1/ /livro/ 301
 /* /404.html 404

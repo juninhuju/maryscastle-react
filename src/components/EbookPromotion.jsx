@@ -8,10 +8,12 @@ function EbookPromotion({ compact = false }) {
       aria-labelledby="ebook-promotion-title"
     >
       <div className="ebook-promotion-copy">
-        <p className="section-kicker">O Castelo das Marias</p>
-        <h2 id="ebook-promotion-title">E-book</h2>
+        <p className="section-kicker">
+          {compact ? "Edição digital · oferta especial" : "O Castelo das Marias"}
+        </p>
+        <h2 id="ebook-promotion-title">E-book em PDF</h2>
         <p>
-          Formato PDF · {ebookProduct.pageCount} páginas
+          Formato PDF · {ebookProduct.pageCount} páginas · envio por e-mail
         </p>
       </div>
       <div className="ebook-presale-offer">
@@ -25,7 +27,7 @@ function EbookPromotion({ compact = false }) {
         <div className="ebook-offer-action">
           <Link
             className="ebook-buy-button purchase-button"
-            to="/comprar"
+            to="/comprar/"
             aria-label={`Ver detalhes do e-book em formato PDF, de ${ebookProduct.formattedRegularPrice} por ${ebookProduct.formattedPrice}.`}
           >
             Ver detalhes do e-book

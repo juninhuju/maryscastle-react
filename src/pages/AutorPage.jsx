@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function AutorPage() {
   return (
     <main className="container-fluid page-author">
@@ -41,6 +43,12 @@ function AutorPage() {
           e religiões. Esse olhar antropológico sobre o comportamento humano é o
           combustível de sua imaginação, alimentando histórias que buscam o que
           há de oculto sob a superfície da normalidade.
+        </p>
+        <p className="author-links">
+          Conheça a obra de estreia do autor lendo gratuitamente os{" "}
+          <Link to="/livro/">quatro primeiros capítulos</Link>, explorando{" "}
+          <Link to="/reinos/">os quatro reinos</Link> ou conferindo as opções
+          para <Link to="/comprar/">adquirir o livro</Link>.
         </p>
       </article>
     </main>

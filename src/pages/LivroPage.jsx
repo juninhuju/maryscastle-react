@@ -148,7 +148,7 @@ function LivroPage() {
           <Link
             key={item.number}
             className="chapter-index-link"
-            to={item.number === 1 ? "/livro" : `/livro/${item.number}`}
+            to={item.number === 1 ? "/livro/" : `/livro/${item.number}/`}
             aria-current={item.number === chapter.number ? "page" : undefined}
           >
             <span>Capítulo {item.number}</span>
@@ -272,14 +272,14 @@ function LivroPage() {
           <div className="chapter-end-actions">
             <Link
               className="btn purchase-button chapter-end-purchase"
-              to="/comprar"
+              to="/comprar/"
             >
-              Comprar livro físico
+              Comprar o livro
             </Link>
-            <Link to="/reinos" className="btn btn-secondary">
+            <Link to="/reinos/" className="btn btn-secondary">
               Conhecer os reinos
             </Link>
-            <Link to="/quiz" className="btn btn-primary">
+            <Link to="/quiz/" className="btn btn-primary">
               Fazer o quiz
             </Link>
           </div>
@@ -290,7 +290,7 @@ function LivroPage() {
         {chapter.number > 1 && (
           <Link
             className="chapter-navigation-link chapter-previous"
-            to={chapter.number === 2 ? "/livro" : `/livro/${chapter.number - 1}`}
+            to={chapter.number === 2 ? "/livro/" : `/livro/${chapter.number - 1}/`}
           >
             <span aria-hidden="true">←</span> Capítulo anterior
           </Link>
@@ -298,7 +298,7 @@ function LivroPage() {
         {chapter.number < capitulos.length && (
           <Link
             className="chapter-navigation-link chapter-next"
-            to={`/livro/${chapter.number + 1}`}
+            to={`/livro/${chapter.number + 1}/`}
           >
             Próximo capítulo <span aria-hidden="true">→</span>
           </Link>

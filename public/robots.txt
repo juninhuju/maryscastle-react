@@ -1,6 +1,7 @@
 # robots.txt for O Castelo das Marias
 User-agent: *
 Allow: /
+Disallow: /api/
 
 # Sitemap location
 Sitemap: https://livroocastelodasmarias.netlify.app/sitemap.xml

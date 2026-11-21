@@ -23,7 +23,7 @@ function KingdomPage() {
 
   return (
     <main className="container-fluid page-reino">
-      <Link className="back-link" to="/reinos">
+      <Link className="back-link" to="/reinos/">
         Voltar para os reinos
       </Link>
       <p className="section-kicker page-kicker">Explore este plano</p>
@@ -83,7 +83,7 @@ function KingdomPage() {
           Os quatro primeiros capítulos estão disponíveis gratuitamente para
           leitura online.
         </p>
-        <Link to="/livro" className="btn btn-primary">
+        <Link to="/livro/" className="btn btn-primary">
           Começar a ler grátis <span aria-hidden="true">→</span>
         </Link>
       </section>
@@ -94,7 +94,7 @@ function KingdomPage() {
             <span>Reino anterior</span>
             <strong>{reinoAnterior.titulo}</strong>
           </Link>
-          <Link className="kingdom-pager-index" to="/reinos">
+          <Link className="kingdom-pager-index" to="/reinos/">
             Todos os reinos
           </Link>
           <Link

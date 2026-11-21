@@ -11,22 +11,37 @@ function Header() {
         </Link>
 
         <nav className="nav-links" aria-label="Navegação principal">
-          <NavLink to="/" end className="nav-link">
-            Início
+          <NavLink
+            to="/"
+            end
+            className="nav-link nav-link-home"
+            aria-label="Início"
+            title="Início"
+          >
+            <svg
+              className="nav-home-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M3 10.5 12 3l9 7.5" />
+              <path d="M5.5 9.5V20h13V9.5" />
+              <path d="M9.5 20v-6h5v6" />
+            </svg>
+            <span className="sr-only">Início</span>
           </NavLink>
-          <NavLink to="/livro" className="nav-link nav-link-reading">
+          <NavLink to="/livro/" className="nav-link nav-link-reading">
             Ler grátis
           </NavLink>
-          <NavLink to="/quiz" className="nav-link">
+          <NavLink to="/quiz/" className="nav-link">
             Quiz
           </NavLink>
-          <NavLink to="/reinos" className="nav-link">
+          <NavLink to="/reinos/" className="nav-link">
             Reinos
           </NavLink>
-          <NavLink to="/galeria" className="nav-link">
-            Imagens
+          <NavLink to="/galeria/" className="nav-link">
+            Galeria
           </NavLink>
-          <NavLink to="/autor" className="nav-link">
+          <NavLink to="/autor/" className="nav-link">
             Autor
           </NavLink>
         </nav>

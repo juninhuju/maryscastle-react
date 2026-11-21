@@ -8,6 +8,7 @@ import { createServer } from "vite";
 
 const projectDirectory = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputDirectory = join(projectDirectory, "dist");
+const publicDirectory = join(projectDirectory, "public");
 const rootTemplate = await readFile(join(outputDirectory, "index.html"), "utf8");
 
 function escapeHtml(value) {
@@ -107,6 +108,34 @@ function applyMetadata(html, metadata) {
   );
 }
 
+function buildSitemapXml(routes, getSeoMetadata) {
+  const lastmod = new Date().toISOString().slice(0, 10);
+  const entries = routes.map((route) => {
+    const metadata = getSeoMetadata(route);
+    const imageBlock = metadata.imageUrl
+      ? `
+    <image:image>
+      <image:loc>${escapeHtml(metadata.imageUrl)}</image:loc>
+      <image:title>${escapeHtml(metadata.imageTitle || metadata.title)}</image:title>
+    </image:image>`
+      : "";
+
+    return `  <url>
+    <loc>${escapeHtml(metadata.canonicalUrl)}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${metadata.changefreq || "monthly"}</changefreq>
+    <priority>${metadata.priority || "0.8"}</priority>${imageBlock}
+  </url>`;
+  });
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${entries.join("\n")}
+</urlset>
+`;
+}
+
 const vite = await createServer({
   appType: "custom",
   server: { middlewareMode: true },
@@ -120,29 +149,42 @@ try {
     ]);
 
   for (const route of prerenderPaths) {
+    const metadata = getSeoMetadata(route);
     const appHtml = renderToString(
       createElement(
         StaticRouter,
-        { location: route },
+        { location: metadata.canonicalPath },
         createElement(AppContent),
       ),
     );
-    const routeHtml = applyMetadata(rootTemplate, getSeoMetadata(route)).replace(
+    const routeHtml = applyMetadata(rootTemplate, metadata).replace(
       '<div id="root"></div>',
-      `<div id="root" data-prerender-path="${escapeHtml(route)}">${appHtml}</div>`,
+      `<div id="root" data-prerender-path="${escapeHtml(metadata.canonicalPath)}">${appHtml}</div>`,
     );
 
     if (routeHtml === rootTemplate) {
-      throw new Error(`Não foi possível gerar o HTML pré-renderizado de ${route}.`);
+      throw new Error(
+        `Não foi possível gerar o HTML pré-renderizado de ${route}.`,
+      );
     }
 
-    const routeDirectory =
-      route === "/" ? outputDirectory : join(outputDirectory, route.slice(1));
+    const relativeSegment = metadata.canonicalPath.replace(/^\/+|\/+$/g, "");
+    const routeDirectory = relativeSegment
+      ? join(outputDirectory, relativeSegment)
+      : outputDirectory;
     await mkdir(routeDirectory, { recursive: true });
     await writeFile(join(routeDirectory, "index.html"), routeHtml);
   }
 
-  console.log(`HTML pré-renderizado para ${prerenderPaths.length} rotas.`);
+  const sitemapXml = buildSitemapXml(prerenderPaths, getSeoMetadata);
+  await Promise.all([
+    writeFile(join(outputDirectory, "sitemap.xml"), sitemapXml),
+    writeFile(join(publicDirectory, "sitemap.xml"), sitemapXml),
+  ]);
+
+  console.log(
+    `HTML pré-renderizado para ${prerenderPaths.length} rotas e sitemap.xml atualizado.`,
+  );
 } finally {
   await vite.close();
 }

@@ -30,7 +30,9 @@ function PageReset() {
 
 export function AppContent() {
   const { pathname } = useLocation();
-  const isPurchasePage = pathname === "/comprar";
+  const normalizedPath =
+    pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+  const isPurchasePage = normalizedPath === "/comprar";
 
   return (
     <div className="page-container">

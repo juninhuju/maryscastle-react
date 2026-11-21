@@ -15,3 +15,14 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/clipe.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/capitulos"
+  [headers.values]
+    Content-Type = "application/pdf"
+    X-Robots-Tag = "noindex, nofollow"

@@ -451,6 +451,11 @@ function QuizPage() {
     <main className="container-fluid quiz-page">
       <p className="section-kicker page-kicker">Uma escolha revela caminhos</p>
       <h1>Descubra seu Reino</h1>
+      <p className="lead quiz-intro">
+        Responda a 12 dilemas sobre desejo, justiça, equilíbrio e livre-arbítrio
+        para descobrir com qual dos quatro reinos de{" "}
+        <em>O Castelo das Marias</em> suas escolhas mais ressoam.
+      </p>
 
       {resultado ? (
         <section className="quiz-result-card">
@@ -471,7 +476,7 @@ function QuizPage() {
               {reinoResultado.introducao} Para conhecer essa jornada de perto,
               comece pelos capítulos gratuitos.
             </p>
-            <Link to="/livro" className="quiz-book-link">
+            <Link to="/livro/" className="quiz-book-link">
               Ler os quatro primeiros capítulos <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -695,6 +700,28 @@ function QuizPage() {
           </div>
         </form>
       )}
+
+      <section
+        className="quiz-kingdoms-overview"
+        aria-labelledby="quiz-kingdoms-title"
+      >
+        <h2 id="quiz-kingdoms-title">Os quatro destinos possíveis</h2>
+        <p>
+          Cada resposta aproxima você de um dos planos sobrenaturais do romance
+          de Junior Cristovam. Antes ou depois do teste, você pode conhecer os
+          guardiões e as leis de cada reino:
+        </p>
+        <ul className="quiz-kingdoms-list">
+          {dadosReinos.map((reino) => (
+            <li key={reino.slug}>
+              <Link to={reino.rota}>
+                <strong>Reino {reino.titulo}</strong> ({reino.guardiao})
+              </Link>
+              <span> — {reino.principios}.</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

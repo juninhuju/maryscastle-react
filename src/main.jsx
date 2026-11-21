@@ -10,7 +10,13 @@ const app = (
   </StrictMode>
 )
 
-if (rootElement.dataset.prerenderPath === window.location.pathname) {
+const normalizePath = (value = "") =>
+  value === "/" ? "/" : value.replace(/\/+$/, "") || "/"
+
+if (
+  normalizePath(rootElement.dataset.prerenderPath) ===
+  normalizePath(window.location.pathname)
+) {
   hydrateRoot(rootElement, app)
 } else {
   createRoot(rootElement).render(app)

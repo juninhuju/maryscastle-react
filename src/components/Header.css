@@ -58,6 +58,9 @@
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.55rem 0.62rem;
   border-radius: 6px;
   color: color-mix(in srgb, var(--lightbeige) 82%, transparent);
@@ -65,6 +68,21 @@
   transition:
     color 0.2s ease,
     background-color 0.2s ease;
+}
+
+.nav-link-home {
+  padding: 0.52rem 0.6rem;
+}
+
+.nav-home-icon {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .nav-link:hover,

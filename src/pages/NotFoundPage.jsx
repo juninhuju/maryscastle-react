@@ -13,7 +13,7 @@ function NotFoundPage() {
         <Link className="btn btn-primary" to="/">
           Voltar ao início
         </Link>
-        <Link className="btn btn-secondary" to="/reinos">
+        <Link className="btn btn-secondary" to="/reinos/">
           Explorar os reinos
         </Link>
       </div>

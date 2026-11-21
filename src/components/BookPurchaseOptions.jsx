@@ -27,7 +27,12 @@ function BookPurchaseOptions({ compact = false }) {
       <div className="book-purchase-copy">
         <p className="section-kicker">Livro físico à venda</p>
         {compact ? (
-          <h2 id="purchase-title">Escolha sua loja</h2>
+          <>
+            <h2 id="purchase-title">Edição impressa</h2>
+            <p className="book-purchase-subtitle">
+              Disponível nas lojas oficiais com entrega em todo o Brasil.
+            </p>
+          </>
         ) : (
           <h1 id="purchase-title">Onde comprar O Castelo das Marias</h1>
         )}

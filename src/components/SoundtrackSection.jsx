@@ -1,4 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+const MEDIA_PLAY_EVENT = "castle-media-play";
 
 const tracks = {
   original: {
@@ -17,6 +19,21 @@ function SoundtrackSection() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState("original");
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    const handleOtherMediaPlay = (event) => {
+      if (event.detail?.source === "soundtrack") return;
+      const audio = audioRef.current;
+      if (audio && !audio.paused) {
+        audio.pause();
+      }
+    };
+
+    window.addEventListener(MEDIA_PLAY_EVENT, handleOtherMediaPlay);
+    return () => {
+      window.removeEventListener(MEDIA_PLAY_EVENT, handleOtherMediaPlay);
+    };
+  }, []);
 
   const playTrack = async (trackId) => {
     const audio = audioRef.current;
@@ -54,7 +71,14 @@ function SoundtrackSection() {
           <audio
             ref={audioRef}
             preload="none"
-            onPlay={() => setIsPlaying(true)}
+            onPlay={() => {
+              setIsPlaying(true);
+              window.dispatchEvent(
+                new CustomEvent(MEDIA_PLAY_EVENT, {
+                  detail: { source: "soundtrack" },
+                }),
+              );
+            }}
             onPause={() => setIsPlaying(false)}
             onEnded={() => setIsPlaying(false)}
           />
