@@ -26,6 +26,22 @@ function getBookStructuredData(description) {
   };
 }
 
+function getBookTrailerVideoData(pageUrl) {
+  return {
+    "@type": "VideoObject",
+    "@id": `${pageUrl}#book-trailer`,
+    name: "Clipe oficial — O Castelo das Marias",
+    description:
+      "Um vislumbre de 36 segundos pela travessia de Joaquim em O Castelo das Marias — onde sedução, magia e mistérios se entrelaçam a cada porta.",
+    thumbnailUrl: [bookCoverUrl],
+    uploadDate: "2026-11-21T00:00:00-03:00",
+    duration: "PT36S",
+    contentUrl: `${siteUrl}/clipe.mp4`,
+    encodingFormat: "video/mp4",
+    inLanguage: "pt-BR",
+  };
+}
+
 function createBreadcrumbList(items) {
   return {
     "@type": "BreadcrumbList",
@@ -236,6 +252,7 @@ export function getSeoMetadata(pathname) {
           inLanguage: "pt-BR",
         },
         bookNode,
+        getBookTrailerVideoData(`${siteUrl}/`),
       ],
     };
   } else if (normalizedPath === "/comprar") {
@@ -392,6 +409,7 @@ export function getSeoMetadata(pathname) {
           image: imageUrl,
           inLanguage: "pt-BR",
         },
+        getBookTrailerVideoData(canonicalUrl),
         createBreadcrumbList([
           ["Início", "/"],
           ["Galeria", "/galeria/"],

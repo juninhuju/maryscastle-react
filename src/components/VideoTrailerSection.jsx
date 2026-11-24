@@ -56,6 +56,7 @@ export function VideoTrailerPlayer() {
           poster="/Capalivro.jpeg"
           width={720}
           height={1276}
+          title="Clipe oficial de O Castelo das Marias"
           aria-label="Clipe promocional do livro O Castelo das Marias"
           onPlay={handleVideoPlay}
           onError={() => setHasError(true)}
